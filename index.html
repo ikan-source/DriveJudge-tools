@@ -4,121 +4,128 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#0d1117">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#f6f2ea">
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon.svg">
 <title>Drive Judge — カーシェア vs レンタカー</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Shippori+Mincho+B1:wght@500;700;800&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#0d1117; --bg2:#141b25; --panel:#171f2b; --panel2:#1e2836;
-    --line:#28323f; --line2:#33414f;
-    --ink:#e8edf2; --ink-dim:#8896a5; --ink-faint:#5a6776;
-    --amber:#ffb347; --amber-deep:#ff8c32; --glow:rgba(255,160,60,.18);
-    --teal:#4fd1c5; --rose:#ff6b6b; --green:#5bd97a; --blue:#6aa9ff;
+    --bg:#f6f2ea; --bg2:#fbf8f2; --panel:#ffffff; --panel2:#f4eee3;
+    --line:#e7ddcd; --line2:#d8ccb6;
+    --ink:#2c2723; --ink-dim:#6f6557; --ink-faint:#a99e8c;
+    --amber:#d9772b; --amber-deep:#bd6017; --glow:rgba(217,119,43,.13);
+    --teal:#2c8f82; --rose:#bd4a30; --green:#3f9b54; --blue:#3d77b5;
     --radius:16px;
     --mono:'DM Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+    --serif:'Shippori Mincho B1','Hiragino Mincho ProN','Songti SC',serif;
     --ui:'Zen Kaku Gothic New',-apple-system,BlinkMacSystemFont,'Hiragino Sans','PingFang SC','Noto Sans JP',sans-serif;
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
   html,body{background:var(--bg);color:var(--ink);font-family:var(--ui);-webkit-font-smoothing:antialiased}
   body{min-height:100vh;padding:max(16px,env(safe-area-inset-top)) 16px max(28px,env(safe-area-inset-bottom));
-    background:radial-gradient(120% 80% at 100% -10%, rgba(255,160,60,.10), transparent 55%),radial-gradient(90% 60% at -10% 110%, rgba(79,209,197,.06), transparent 50%),var(--bg);}
+    background:radial-gradient(130% 90% at 100% -10%, rgba(217,119,43,.07), transparent 55%),radial-gradient(90% 60% at -10% 105%, rgba(44,143,130,.05), transparent 50%),var(--bg);}
   .wrap{max-width:600px;margin:0 auto}
-  header{padding:6px 2px 14px}
-  .kicker{font-size:11px;letter-spacing:.32em;color:var(--amber);font-weight:700;text-transform:uppercase;margin-bottom:8px;display:flex;align-items:center;gap:8px}
-  .kicker::before{content:"";width:22px;height:1px;background:var(--amber);box-shadow:0 0 8px var(--amber)}
-  h1{font-size:25px;font-weight:900;line-height:1.18;letter-spacing:-.01em}
-  h1 .vs{color:var(--ink-faint);font-weight:500;font-size:18px;margin:0 6px}
+  header{padding:8px 2px 14px}
+  .kicker{font-size:11px;letter-spacing:.34em;color:var(--amber);font-weight:700;text-transform:uppercase;margin-bottom:9px;display:flex;align-items:center;gap:8px}
+  .kicker::before{content:"";width:22px;height:1.5px;background:var(--amber)}
+  h1{font-family:var(--serif);font-size:27px;font-weight:800;line-height:1.16;letter-spacing:.01em}
+  h1 .vs{color:var(--ink-faint);font-weight:500;font-size:18px;margin:0 7px;font-family:var(--ui)}
 
-  .tabs{display:flex;gap:6px;background:var(--bg);padding:5px;border-radius:13px;border:1px solid var(--line);margin-bottom:14px}
-  .tabs button{flex:1;padding:11px;border:none;background:none;color:var(--ink-dim);font-family:var(--ui);font-size:13px;font-weight:700;border-radius:9px;cursor:pointer;transition:.15s}
-  .tabs button.on{background:linear-gradient(180deg,var(--panel2),var(--panel));color:var(--amber);box-shadow:0 1px 6px rgba(0,0,0,.35)}
+  .tabs{display:flex;gap:6px;background:var(--panel2);padding:5px;border-radius:13px;border:1px solid var(--line);margin-bottom:14px}
+  .tabs button{flex:1;padding:11px 4px;border:none;background:none;color:var(--ink-dim);font-family:var(--ui);font-size:12.5px;font-weight:700;border-radius:9px;cursor:pointer;transition:.15s}
+  .tabs button.on{background:var(--panel);color:var(--amber);box-shadow:0 1px 5px rgba(120,90,40,.12)}
 
-  .card{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:14px}
-  .card-t{font-size:12px;font-weight:700;color:var(--ink-dim);letter-spacing:.04em;margin-bottom:13px;display:flex;align-items:center;gap:7px;justify-content:space-between}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:0 2px 14px rgba(140,110,60,.06)}
+  .card-t{font-family:var(--serif);font-size:13px;font-weight:700;color:var(--ink);letter-spacing:.02em;margin-bottom:13px;display:flex;align-items:center;gap:7px;justify-content:space-between}
   .card-t .l{display:flex;align-items:center;gap:7px}
-  .card-t .dot{width:6px;height:6px;border-radius:50%;background:var(--amber);box-shadow:0 0 6px var(--amber)}
-  .card-t .mini{font-weight:500;font-size:10.5px;color:var(--ink-faint);letter-spacing:0;cursor:pointer;text-decoration:underline}
+  .card-t .dot{width:6px;height:6px;border-radius:50%;background:var(--amber)}
+  .card-t .mini{font-family:var(--ui);font-weight:500;font-size:10.5px;color:var(--ink-faint);letter-spacing:0;cursor:pointer;text-decoration:underline}
 
   label{font-size:11.5px;color:var(--ink-dim);font-weight:500;display:block;margin-bottom:6px}
   label .hint{color:var(--ink-faint);font-size:10.5px}
-  .inputbox{display:flex;align-items:center;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:0 12px;transition:.16s}
-  .inputbox:focus-within{border-color:var(--amber-deep);box-shadow:0 0 0 3px var(--glow)}
+  .inputbox{display:flex;align-items:center;background:var(--bg2);border:1px solid var(--line);border-radius:11px;padding:0 12px;transition:.16s}
+  .inputbox:focus-within{border-color:var(--amber);box-shadow:0 0 0 3px var(--glow);background:#fff}
   .inputbox input{flex:1;background:none;border:none;outline:none;color:var(--ink);font-family:var(--mono);font-size:16px;font-weight:500;padding:11px 0;width:100%;min-width:0}
   .inputbox input.txt{font-family:var(--ui);font-size:14px}
   .inputbox .unit{color:var(--ink-faint);font-size:12px;font-family:var(--mono);padding-left:6px;white-space:nowrap}
   input[type=number]{-moz-appearance:textfield}
   input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 
-  .stop{display:flex;gap:8px;align-items:center;margin-bottom:9px}
-  .stop .pin{width:22px;flex:0 0 auto;text-align:center;font-family:var(--mono);font-size:12px;color:var(--amber)}
+  .stop{display:flex;gap:7px;align-items:center;margin-bottom:9px}
+  .stop .pin{width:20px;flex:0 0 auto;text-align:center;font-family:var(--mono);font-size:12px;color:var(--amber);font-weight:500}
   .stop .inputbox{flex:1}
-  .stop .rm{flex:0 0 auto;width:34px;height:38px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--ink-faint);font-size:16px;cursor:pointer}
-  .stop .rm:active{transform:scale(.95)}
+  .stop .ord{display:flex;flex-direction:column;gap:2px;flex:0 0 auto}
+  .stop .ord button{width:26px;height:17px;border:1px solid var(--line);background:var(--panel2);color:var(--ink-faint);font-size:9px;border-radius:5px;cursor:pointer;line-height:1;padding:0}
+  .stop .ord button:active{transform:scale(.92)}
+  .stop .rm{flex:0 0 auto;width:30px;height:38px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--ink-faint);font-size:15px;cursor:pointer}
   .addstop{width:100%;padding:10px;border:1px dashed var(--line2);background:none;color:var(--ink-dim);border-radius:11px;font-family:var(--ui);font-size:12.5px;font-weight:500;cursor:pointer;transition:.15s;margin-top:2px}
-  .addstop:active{transform:scale(.99)} .addstop:hover{border-color:var(--amber-deep);color:var(--amber)}
+  .addstop:hover{border-color:var(--amber);color:var(--amber)}
+  .routebtns{display:flex;gap:8px;margin-top:9px}
+  .routebtns .seg{flex:1}
 
-  #map{width:100%;height:230px;border-radius:13px;margin-top:13px;border:1px solid var(--line);background:var(--bg);display:none}
-  .legs{display:none;margin-top:10px;font-size:11px;color:var(--ink-faint);line-height:1.7;font-family:var(--mono)}
-
+  #map{width:100%;height:230px;border-radius:13px;margin-top:13px;border:1px solid var(--line);background:var(--bg2);display:none}
+  .legs{display:none;margin-top:10px;font-size:11px;color:var(--ink-faint);line-height:1.8;font-family:var(--mono)}
+  .legs b{color:var(--ink-dim)}
   .status{font-size:11px;margin-top:10px;font-family:var(--mono)}
   .status.ok{color:var(--green)} .status.err{color:var(--rose)} .status.wait{color:var(--ink-faint)}
+  .tollrow{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px}
+  .tollrow a{font-size:10.5px;color:var(--blue);text-decoration:underline;white-space:nowrap}
 
-  .maps-banner{display:flex;gap:9px;align-items:flex-start;background:rgba(106,169,255,.08);border:1px solid rgba(106,169,255,.25);border-radius:11px;padding:11px 13px;margin-top:12px;font-size:11.5px;color:var(--ink-dim);line-height:1.55}
+  .maps-banner{display:flex;gap:9px;align-items:flex-start;background:rgba(61,119,181,.07);border:1px solid rgba(61,119,181,.22);border-radius:11px;padding:11px 13px;margin-top:12px;font-size:11.5px;color:var(--ink-dim);line-height:1.55}
   .maps-banner b{color:var(--blue)}
   .keyrow{display:flex;gap:8px;margin-top:10px}
   .keyrow .inputbox{flex:1}
   .btn{border:none;border-radius:11px;padding:0 16px;font-family:var(--ui);font-weight:700;font-size:12.5px;cursor:pointer;transition:.16s;white-space:nowrap;display:flex;align-items:center;justify-content:center}
   .btn:active{transform:scale(.97)}
-  .btn.amber{background:linear-gradient(180deg,var(--amber),var(--amber-deep));color:#241400}
+  .btn.amber{background:var(--amber);color:#fff}
   .btn.ghost{background:var(--panel2);color:var(--ink-dim);border:1px solid var(--line)}
 
   .row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:11px}
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
   .mt{margin-top:12px}
-  .seg{display:flex;gap:6px;background:var(--bg);padding:4px;border-radius:11px;border:1px solid var(--line)}
+  .seg{display:flex;gap:5px;background:var(--bg2);padding:4px;border-radius:11px;border:1px solid var(--line)}
   .seg button{flex:1;padding:9px 6px;border:none;background:none;color:var(--ink-dim);font-family:var(--ui);font-size:12px;font-weight:500;border-radius:8px;cursor:pointer;transition:.15s;line-height:1.2}
   .seg button small{display:block;font-size:9.5px;color:var(--ink-faint);margin-top:2px}
-  .seg button.on{background:var(--panel2);color:var(--amber);box-shadow:0 1px 4px rgba(0,0,0,.3)}
+  .seg button.on{background:var(--panel);color:var(--amber);box-shadow:0 1px 4px rgba(120,90,40,.12);font-weight:700}
   .seg button.on small{color:var(--amber-deep)}
 
-  .toggle{display:flex;align-items:center;justify-content:space-between;background:var(--bg);border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin-top:11px}
+  .toggle{display:flex;align-items:center;justify-content:space-between;background:var(--bg2);border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin-top:11px}
   .toggle .tl{font-size:12.5px;color:var(--ink)}
   .toggle .tl small{display:block;color:var(--ink-faint);font-size:10.5px;margin-top:2px}
   .sw{position:relative;width:42px;height:24px;flex:0 0 auto}
   .sw input{opacity:0;width:0;height:0}
   .sw .track{position:absolute;inset:0;background:var(--line2);border-radius:24px;transition:.2s;cursor:pointer}
-  .sw .track::before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;background:#cfd8e2;border-radius:50%;transition:.2s}
-  .sw input:checked + .track{background:linear-gradient(90deg,var(--amber-deep),var(--amber))}
-  .sw input:checked + .track::before{transform:translateX(18px);background:#fff}
+  .sw .track::before{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.2)}
+  .sw input:checked + .track{background:var(--amber)}
+  .sw input:checked + .track::before{transform:translateX(18px)}
 
-  .readout{display:flex;align-items:baseline;justify-content:space-between;background:var(--bg);border:1px dashed var(--line2);border-radius:11px;padding:11px 13px;margin-top:12px}
+  .readout{display:flex;align-items:baseline;justify-content:space-between;background:var(--bg2);border:1px dashed var(--line2);border-radius:11px;padding:11px 13px;margin-top:12px}
   .readout .lab{font-size:11.5px;color:var(--ink-dim)}
   .readout .val{font-family:var(--mono);font-size:18px;font-weight:500;color:var(--amber)}
   .readout small{color:var(--ink-faint);font-size:11px;font-family:var(--mono)}
 
-  .winner{position:relative;overflow:hidden;border-radius:var(--radius);padding:18px;margin-bottom:14px;border:1px solid var(--amber-deep);background:linear-gradient(135deg,rgba(255,160,60,.16),rgba(255,140,50,.05))}
-  .winner::after{content:"";position:absolute;right:-40px;top:-40px;width:140px;height:140px;background:radial-gradient(circle,var(--glow),transparent 70%)}
+  .winner{position:relative;overflow:hidden;border-radius:var(--radius);padding:18px;margin-bottom:14px;border:1px solid var(--amber);background:linear-gradient(135deg,rgba(217,119,43,.10),rgba(217,119,43,.03));box-shadow:0 2px 14px rgba(189,96,23,.08)}
   .winner .vlab{font-size:11px;letter-spacing:.2em;color:var(--amber);font-weight:700;text-transform:uppercase}
-  .winner .vmain{font-size:21px;font-weight:900;margin:6px 0 3px;letter-spacing:-.01em;position:relative;z-index:1}
-  .winner .vmain .px{font-family:var(--mono);color:var(--amber)}
-  .winner .vsub{font-size:12px;color:var(--ink-dim);line-height:1.6;position:relative;z-index:1}
+  .winner .vmain{font-family:var(--serif);font-size:21px;font-weight:800;margin:6px 0 3px;letter-spacing:.01em}
+  .winner .vmain .px{font-family:var(--mono);color:var(--amber-deep)}
+  .winner .vsub{font-size:12px;color:var(--ink-dim);line-height:1.6}
 
-  .sec-h{font-size:11px;font-weight:700;letter-spacing:.1em;color:var(--ink-faint);text-transform:uppercase;margin:18px 2px 9px;display:flex;align-items:center;gap:8px}
+  .sec-h{font-family:var(--serif);font-size:13px;font-weight:700;color:var(--ink);margin:18px 2px 9px;display:flex;align-items:center;gap:8px}
+  .sec-h span{font-family:var(--ui);font-size:11px;color:var(--ink-faint);font-weight:500}
   .lb{display:flex;flex-direction:column;gap:8px}
-  .op{background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:13px;overflow:hidden;transition:.18s}
-  .op.best{border-color:var(--green);box-shadow:0 0 0 1px rgba(91,217,122,.25)}
+  .op{background:var(--panel);border:1px solid var(--line);border-radius:13px;overflow:hidden;transition:.18s;box-shadow:0 1px 8px rgba(140,110,60,.05)}
+  .op.best{border-color:var(--green);box-shadow:0 0 0 1px rgba(63,155,84,.3),0 2px 12px rgba(63,155,84,.08)}
   .op-top{display:flex;align-items:center;gap:10px;padding:12px 14px;cursor:pointer}
   .op-rank{font-family:var(--mono);font-size:13px;color:var(--ink-faint);width:16px;text-align:center;flex:0 0 auto}
   .op.best .op-rank{color:var(--green)}
-  .op-ico{width:30px;height:20px;flex:0 0 auto;opacity:.8}
+  .op-ico{width:30px;height:20px;flex:0 0 auto}
   .op-name{flex:1;min-width:0}
   .op-name .nm{font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
-  .op-name .nm .tag{font-size:9px;font-weight:700;padding:2px 6px;border-radius:5px;background:var(--green);color:#06210e;letter-spacing:.04em}
+  .op-name .nm .tag{font-size:9px;font-weight:700;padding:2px 6px;border-radius:5px;background:var(--green);color:#fff;letter-spacing:.04em}
   .op-name .dt{font-size:10.5px;color:var(--ink-faint);margin-top:2px;font-family:var(--mono)}
   .op-price{text-align:right;flex:0 0 auto}
   .op-price .pp{font-family:var(--mono);font-size:19px;font-weight:500;letter-spacing:-.02em}
@@ -135,32 +142,48 @@
   .op-body .ln.tot{font-weight:700} .op-body .ln.tot .v{color:var(--ink)}
   .op-body .meta{font-size:10.5px;color:var(--ink-faint);margin-top:8px;line-height:1.5}
   .op-body .cars{margin-top:9px;display:flex;flex-wrap:wrap;gap:5px}
-  .op-body .cars .cc{font-size:10px;color:var(--ink-dim);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:3px 7px}
+  .op-body .cars .cc{font-size:10px;color:var(--ink-dim);background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:3px 7px}
 
-  .note{font-size:11px;color:var(--ink-faint);line-height:1.6;margin-top:12px;padding:11px 13px;background:var(--bg);border-radius:11px;border:1px solid var(--line)}
-  .note b{color:var(--rose)} .note.tip b{color:var(--amber)}
+  .note{font-size:11px;color:var(--ink-dim);line-height:1.6;margin-top:12px;padding:11px 13px;background:var(--bg2);border-radius:11px;border:1px solid var(--line)}
+  .note b{color:var(--rose)} .note.tip b{color:var(--amber-deep)}
 
+  .filterbar{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+  .filterbar button{padding:7px 13px;border-radius:9px;border:1px solid var(--line);background:var(--bg2);color:var(--ink-dim);font-family:var(--ui);font-size:12px;font-weight:500;cursor:pointer;transition:.15s}
+  .filterbar button.on{background:var(--amber);color:#fff;border-color:var(--amber)}
   .rv{display:flex;flex-direction:column;gap:8px;margin-top:4px}
-  .rvrow{display:flex;align-items:center;gap:11px;background:linear-gradient(180deg,var(--panel),var(--bg2));border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  .rvrow{display:flex;align-items:center;gap:11px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:0 1px 8px rgba(140,110,60,.05)}
   .rvrow .rn{flex:1;min-width:0}
-  .rvrow .rn .t{font-size:13.5px;font-weight:700}
-  .rvrow .rn .d{font-size:10.5px;color:var(--ink-faint);font-family:var(--mono);margin-top:2px}
+  .rvrow .rn .t{font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:7px}
+  .rvrow .rn .t .dir{font-size:9px;font-weight:700;color:var(--amber-deep);background:var(--glow);border-radius:5px;padding:2px 6px}
+  .rvrow .rn .d{font-size:10.5px;color:var(--ink-faint);font-family:var(--mono);margin-top:3px}
   .rvrow .rp{text-align:right;flex:0 0 auto}
   .rvrow .rp .pp{font-family:var(--mono);font-size:16px;font-weight:500}
   .rvrow .rp .pv{font-size:10px;color:var(--ink-faint);margin-top:1px}
-  .rvrow.no{opacity:.4}
+  .rvrow.no{opacity:.45}
   .rvbar{height:4px;background:var(--line);border-radius:2px;overflow:hidden;margin-top:7px}
   .rvbar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--green))}
 
+  /* car tab */
+  .carblk{border:1px solid var(--line);border-radius:13px;padding:14px;margin-bottom:11px;background:var(--panel);box-shadow:0 1px 8px rgba(140,110,60,.05)}
+  .carblk .ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
+  .carblk .ch .cn{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
+  .carblk .ch a{font-size:11px;color:var(--blue);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:3px}
+  .carblk .ch a:hover{text-decoration:underline}
+  .carblk .row{display:flex;gap:14px}
+  .carblk .col{flex:1}
+  .carblk .col .lbl{font-size:10px;color:var(--ink-faint);font-weight:700;margin-bottom:5px;letter-spacing:.05em}
+  .carblk .col .list{display:flex;flex-wrap:wrap;gap:5px}
+  .carblk .col .cc{font-size:10.5px;color:var(--ink-dim);background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:3px 7px}
+
   .acc{margin-top:2px}
-  .acc-h{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:13px 16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);font-size:12.5px;color:var(--ink-dim);font-weight:500}
+  .acc-h{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:13px 16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);font-size:12.5px;color:var(--ink-dim);font-weight:500;box-shadow:0 1px 8px rgba(140,110,60,.05)}
   .acc-h .arr{transition:.2s;color:var(--ink-faint)}
   .acc.open .acc-h{border-radius:var(--radius) var(--radius) 0 0;border-bottom:none}
   .acc.open .arr{transform:rotate(180deg)}
   .acc-b{display:none;background:var(--bg2);border:1px solid var(--line);border-top:none;border-radius:0 0 var(--radius) var(--radius);padding:14px 16px}
   .acc.open .acc-b{display:block}
-  .opset{border:1px solid var(--line);border-radius:11px;padding:11px 12px;margin-bottom:10px;background:var(--bg)}
-  .opset .h{font-size:11.5px;font-weight:700;color:var(--amber);margin-bottom:9px}
+  .opset{border:1px solid var(--line);border-radius:11px;padding:11px 12px;margin-bottom:10px;background:var(--panel)}
+  .opset .h{font-size:11.5px;font-weight:700;color:var(--amber-deep);margin-bottom:9px}
   .opset .g{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}
   .opset .f{display:flex;flex-direction:column;gap:3px}
   .opset .f label{font-size:9.5px;color:var(--ink-faint);margin:0}
@@ -172,13 +195,13 @@
   footer{text-align:center;color:var(--ink-faint);font-size:10.5px;line-height:1.7;margin-top:18px;padding:0 8px}
   footer .lnk{color:var(--ink-dim);text-decoration:underline;cursor:pointer}
 
-  .pac-container{background:var(--panel2)!important;border:1px solid var(--line2)!important;border-radius:11px!important;margin-top:6px!important;box-shadow:0 12px 32px rgba(0,0,0,.5)!important;font-family:var(--ui)!important;overflow:hidden}
+  .pac-container{background:var(--panel)!important;border:1px solid var(--line2)!important;border-radius:11px!important;margin-top:6px!important;box-shadow:0 12px 30px rgba(120,90,40,.18)!important;font-family:var(--ui)!important;overflow:hidden}
   .pac-container:after{display:none!important}
   .pac-item{border-top:1px solid var(--line)!important;color:var(--ink-dim)!important;padding:9px 12px!important;font-size:12.5px!important;cursor:pointer}
   .pac-item:first-child{border-top:none!important}
-  .pac-item:hover,.pac-item-selected{background:var(--panel)!important}
+  .pac-item:hover,.pac-item-selected{background:var(--bg2)!important}
   .pac-item-query{color:var(--ink)!important;font-size:13px!important}
-  .pac-matched{color:var(--amber)!important}
+  .pac-matched{color:var(--amber-deep)!important}
   .pac-icon{display:none!important}
 </style>
 </head>
@@ -186,25 +209,34 @@
 <div class="wrap">
 
   <header>
-    <div class="kicker">Drive Cost Judge · v3</div>
+    <div class="kicker">Drive Cost Judge · v4</div>
     <h1>カーシェア<span class="vs">vs</span>レンタカー</h1>
   </header>
 
   <div class="tabs">
     <button data-tab="compare" class="on">比較する</button>
-    <button data-tab="reverse">逆引き（どこ行ける？）</button>
+    <button data-tab="reverse">逆引き</button>
+    <button data-tab="cars">車種一覧</button>
   </div>
 
   <!-- ===== COMPARE ===== -->
   <div id="tab-compare">
     <div class="card">
-      <div class="card-t"><div class="l"><span class="dot"></span>ルート（出発地に戻る往復で計算）</div><span class="mini" id="manualToggle">手入力</span></div>
+      <div class="card-t"><div class="l"><span class="dot"></span>ルート（出発地に戻る周回で計算）</div><span class="mini" id="manualToggle">手入力</span></div>
       <div id="mapsInputs">
         <div class="stop"><div class="pin">●</div><div class="inputbox"><input class="txt" id="origin" placeholder="出発地（例：早稲田駅）" autocomplete="off"></div></div>
         <div id="stops"></div>
         <button class="addstop" id="addStop">＋ 立ち寄り先を追加</button>
+        <div class="routebtns">
+          <div class="seg" id="hwySeg" style="flex:1.4">
+            <button data-hwy="1" class="on">高速あり</button>
+            <button data-hwy="0">下道（高速回避）</button>
+          </div>
+          <button class="btn ghost" id="optBtn" style="flex:1;font-size:11.5px">最短順に</button>
+        </div>
         <div id="map"></div>
         <div class="legs" id="legs"></div>
+        <div class="tollrow"><span style="font-size:11px;color:var(--ink-faint)" id="tollHint"></span><a href="https://www.driveplaza.com/dp/SearchTop" target="_blank" rel="noopener">NEXCOで正確に調べる ↗</a></div>
         <div class="status wait" id="routeStatus"></div>
       </div>
       <div id="manualInputs" style="display:none">
@@ -227,7 +259,7 @@
       <div class="row3 mt">
         <div><label>滞在時間</label><div class="inputbox"><input type="number" id="stay" inputmode="decimal" step="0.5" value="2"><span class="unit">h</span></div></div>
         <div><label>人数 <span class="hint">AA</span></label><div class="inputbox"><input type="number" id="ppl" inputmode="numeric" value="1" min="1"><span class="unit">人</span></div></div>
-        <div><label>高速ほか</label><div class="inputbox"><span class="unit" style="padding:0 3px 0 0">¥</span><input type="number" id="toll" inputmode="numeric" value="0"></div></div>
+        <div><label>高速ほか <span class="hint">概算</span></label><div class="inputbox"><span class="unit" style="padding:0 3px 0 0">¥</span><input type="number" id="toll" inputmode="numeric" value="0"></div></div>
       </div>
       <div class="toggle"><div class="tl">夜間利用（18時〜翌朝）<small>各社のナイトパックを候補に</small></div><label class="sw"><input type="checkbox" id="night"><span class="track"></span></label></div>
       <div class="readout"><span class="lab">合計利用時間 <small id="hbreak"></small></span><span><span class="val" id="totalH">0.0</span><small> h</small></span></div>
@@ -238,13 +270,14 @@
     <div class="acc" id="acc">
       <div class="acc-h" id="accH"><span>⚙︎ 各社の料金パラメータを編集</span><span class="arr">▾</span></div>
       <div class="acc-b">
-        <div style="font-size:11px;color:var(--ink-faint);line-height:1.55;margin-bottom:12px">既定値は各社公表料金（2025末〜2026改定後）の標準会員・標準シーズン目安。実勢に合わせて上書きすると保存されます。表示中の車格＝<b id="clsLabel" style="color:var(--amber)">ミドル</b>。</div>
+        <div style="font-size:11px;color:var(--ink-faint);line-height:1.55;margin-bottom:12px">既定値は各社公表料金（2025末〜2026改定後）の標準会員・標準シーズン目安。実勢に合わせ上書きで保存。表示中の車格＝<b id="clsLabel" style="color:var(--amber-deep)">ミドル</b>。</div>
         <div id="csSettings"></div>
-        <div class="glob" style="color:var(--blue)">レンタカー共通（ガソリン・補償）</div>
+        <div class="glob" style="color:var(--blue)">レンタカー共通／高速概算</div>
         <div class="opset"><div class="g">
           <div class="f"><label>燃費 km/L</label><div class="inputbox"><input type="number" id="kmpl" step="0.1" value="12"></div></div>
           <div class="f"><label>ガソリン ¥/L</label><div class="inputbox"><input type="number" id="gas" value="175"></div></div>
           <div class="f"><label>CDW ¥/日</label><div class="inputbox"><input type="number" id="cdw" value="1650"></div></div>
+          <div class="f"><label>高速概算 ¥/km</label><div class="inputbox"><input type="number" id="tollkm" value="20"></div></div>
         </div>
         <div class="toggle" style="margin-top:9px;padding:8px 11px"><div class="tl" style="font-size:11.5px">CDW(免責補償)を加算</div><label class="sw"><input type="checkbox" id="cdwOn" checked><span class="track"></span></label></div></div>
         <div id="rcSettings"></div>
@@ -271,14 +304,30 @@
           </div>
         </div>
       </div>
-      <div style="font-size:10.5px;color:var(--ink-faint);margin-top:10px;line-height:1.5">距離は早稲田起点の往復目安（高速代は概算）。各地について全社最安を計算し、時間と人均予算を満たすものを安い順に表示します。</div>
+      <label style="margin-top:13px">方面でしぼる</label>
+      <div class="filterbar" id="dirFilter">
+        <button data-d="all" class="on">すべて</button>
+        <button data-d="near">近場</button>
+        <button data-d="west">西（箱根・富士方面）</button>
+        <button data-d="south">南（湘南・房総方面）</button>
+        <button data-d="north">北（秩父・日光方面）</button>
+      </div>
     </div>
     <div id="rvResult"></div>
   </div>
 
+  <!-- ===== CARS ===== -->
+  <div id="tab-cars" style="display:none">
+    <div class="card" style="margin-bottom:12px">
+      <div class="card-t"><div class="l"><span class="dot"></span>各社の代表車種（クラス別）</div></div>
+      <div style="font-size:11.5px;color:var(--ink-dim);line-height:1.6">下の代表例は目安。実際の在庫・写真は各社の公式車種ページ（リンク）で確認を。ベーシック＝コンパクト、ミドル＝SUV/中型の相当クラス。</div>
+    </div>
+    <div id="carsResult"></div>
+  </div>
+
   <footer>
     料金は目安。カーシェアはガソリン・保険込み／レンタカーは満タン返し・距離無制限で計算。<br>
-    地図はGoogle Maps（個人利用は無料枠内）。<span class="lnk" id="aboutLnk">データ・コストについて</span>
+    高速代は距離からの概算（日本の正確な料金はNEXCOで）。<span class="lnk" id="aboutLnk">データ・コストについて</span>
   </footer>
 </div>
 
@@ -289,39 +338,40 @@ function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){mem[k]=v;}}
 
 const DEFAULTS={
   carshare:[
-    {id:'mitsui',name:'三井のカーシェアーズ',dist:'mitsui6h',
+    {id:'mitsui',name:'三井のカーシェアーズ',dist:'mitsui6h',url:'https://www.carshares.jp/car/',
      classes:{basic:{p6:4280,p12:6700,p24:8800,pn:5200,unit:10,per:220,km:18},middle:{p6:5200,p12:7700,p24:9900,pn:6200,unit:10,per:260,km:20}}},
-    {id:'times',name:'タイムズカー',dist:'times20',free:20,
+    {id:'times',name:'タイムズカー',dist:'times20',free:20,url:'https://share.timescar.jp/',
      classes:{basic:{p6:4290,p12:6600,p24:8800,pn:2640,unit:15,per:220,km:16},middle:{p6:5500,p12:7700,p24:9900,pn:3520,unit:15,per:330,km:16}}},
-    {id:'orix',name:'オリックスカーシェア',dist:'all',
+    {id:'orix',name:'オリックスカーシェア',dist:'all',url:'https://www.orix-carshare.com/',
      classes:{basic:{p6:4400,p12:6800,p24:9000,pn:4500,unit:15,per:220,km:18},middle:{p6:5500,p12:8000,p24:10500,pn:5500,unit:15,per:330,km:18}}},
   ],
   rentcar:[
-    {id:'toyota',name:'トヨタレンタカー',classes:{basic:{r6:6050,r12:7150,r24:8800,rday:7040},middle:{r6:7700,r12:9900,r24:12100,rday:9900}}},
-    {id:'nippon',name:'ニッポンレンタカー',classes:{basic:{r6:5500,r12:6600,r24:8030,rday:6490},middle:{r6:7480,r12:9460,r24:11550,rday:9240}}},
-    {id:'orixr',name:'オリックスレンタカー',classes:{basic:{r6:5390,r12:6490,r24:7700,rday:6160},middle:{r6:7150,r12:9020,r24:11000,rday:8800}}},
-    {id:'budget',name:'格安系（ニコニコ等）',classes:{basic:{r6:2530,r12:3850,r24:4730,rday:4180},middle:{r6:4180,r12:5280,r24:6380,rday:5500}}},
+    {id:'toyota',name:'トヨタレンタカー',url:'https://rent.toyota.co.jp/',classes:{basic:{r6:6050,r12:7150,r24:8800,rday:7040},middle:{r6:7700,r12:9900,r24:12100,rday:9900}}},
+    {id:'nippon',name:'ニッポンレンタカー',url:'https://www.nipponrentacar.co.jp/car_price/',classes:{basic:{r6:5500,r12:6600,r24:8030,rday:6490},middle:{r6:7480,r12:9460,r24:11550,rday:9240}}},
+    {id:'orixr',name:'オリックスレンタカー',url:'https://car.orix.co.jp/',classes:{basic:{r6:5390,r12:6490,r24:7700,rday:6160},middle:{r6:7150,r12:9020,r24:11000,rday:8800}}},
+    {id:'budget',name:'格安系（ニコニコ等）',url:'https://www.2525r.com/',classes:{basic:{r6:2530,r12:3850,r24:4730,rday:4180},middle:{r6:4180,r12:5280,r24:6380,rday:5500}}},
   ]
 };
 const MODELS={
-  basic:{mitsui:['ヤリス','アクア','ノート e-POWER','シエンタ','ライズ'],times:['アクア','ノート','フィット','ヤリス','ルーミー'],orix:['アクア','ノート','フィット','ヤリス'],toyota:['ヤリス','アクア','パッソ'],nippon:['ノート','フィット','ヤリス'],orixr:['ノート','フィット','ヤリス'],budget:['フィット','ノート','ヴィッツ系']},
+  basic:{mitsui:['ヤリス','アクア','ノート e-POWER','シエンタ','ライズ'],times:['アクア','ノート','フィット','ヤリス','ルーミー'],orix:['アクア','ノート','フィット','ヤリス'],toyota:['ヤリス','アクア','パッソ'],nippon:['ノート','フィット','ヤリス'],orixr:['ノート','フィット','ヤリス'],budget:['フィット','ノート','コンパクト各種']},
   middle:{mitsui:['CX-5','RAV4','ハリアー','カローラクロス','フォレスター'],times:['カローラクロス','シエンタ','ヴォクシー','CX-30'],orix:['CX-30','ヴェゼル','カローラ','フォレスター'],toyota:['ハリアー','RAV4','カローラクロス'],nippon:['CX-5','エクストレイル','ハリアー'],orixr:['CX-30','ヴェゼル','カローラクロス'],budget:['ヴェゼル系','SUV相当']}
 };
 const ICONS={
-  basic:'<svg class="op-ico" viewBox="0 0 60 36" fill="none" stroke="var(--ink-dim)" stroke-width="2.4"><path d="M6 26h48M10 26l5-12c1-2 3-3 5-3h20c2 0 4 1 5 3l5 12M18 26v3M42 26v3M22 11l1 9M40 11l-1 9"/><circle cx="18" cy="27" r="3.5" fill="var(--bg)"/><circle cx="42" cy="27" r="3.5" fill="var(--bg)"/></svg>',
-  middle:'<svg class="op-ico" viewBox="0 0 60 36" fill="none" stroke="var(--ink-dim)" stroke-width="2.4"><path d="M5 27h50M9 27l3-13c1-2 3-3 5-3h26c2 0 4 1 5 3l3 13M17 27v3M43 27v3M21 11v10M40 11v10"/><circle cx="17" cy="28" r="4" fill="var(--bg)"/><circle cx="43" cy="28" r="4" fill="var(--bg)"/></svg>'
+  basic:'<svg class="op-ico" viewBox="0 0 60 36" fill="none" stroke="var(--ink-faint)" stroke-width="2.4"><path d="M6 26h48M10 26l5-12c1-2 3-3 5-3h20c2 0 4 1 5 3l5 12M18 26v3M42 26v3M22 11l1 9M40 11l-1 9"/><circle cx="18" cy="27" r="3.5" fill="var(--panel)"/><circle cx="42" cy="27" r="3.5" fill="var(--panel)"/></svg>',
+  middle:'<svg class="op-ico" viewBox="0 0 60 36" fill="none" stroke="var(--ink-faint)" stroke-width="2.4"><path d="M5 27h50M9 27l3-13c1-2 3-3 5-3h26c2 0 4 1 5 3l3 13M17 27v3M43 27v3M21 11v10M40 11v10"/><circle cx="17" cy="28" r="4" fill="var(--panel)"/><circle cx="43" cy="28" r="4" fill="var(--panel)"/></svg>'
 };
 const DEST=[
-  {n:'お台場・豊洲',km:32,drv:1.0,toll:1000},{n:'川崎',km:40,drv:1.2,toll:1200},
-  {n:'横浜みなとみらい',km:60,drv:1.8,toll:1600},{n:'鎌倉・江ノ島',km:110,drv:3.0,toll:2200},
-  {n:'海ほたる/木更津',km:140,drv:2.8,toll:2400},{n:'秩父',km:170,drv:4.0,toll:2600},
-  {n:'箱根',km:180,drv:4.2,toll:3000},{n:'伊豆(熱海)',km:200,drv:4.4,toll:3400},
-  {n:'河口湖・富士',km:220,drv:4.6,toll:3600},{n:'日光',km:280,drv:5.6,toll:4800},
-  {n:'房総(鴨川)',km:300,drv:6.0,toll:3000},{n:'軽井沢',km:320,drv:6.2,toll:5800},{n:'那須',km:380,drv:7.0,toll:6200},
+  {n:'お台場・豊洲',km:32,drv:1.0,toll:1000,dir:'near'},{n:'川崎',km:40,drv:1.2,toll:1200,dir:'near'},
+  {n:'横浜みなとみらい',km:60,drv:1.8,toll:1600,dir:'south'},{n:'鎌倉・江ノ島',km:110,drv:3.0,toll:2200,dir:'south'},
+  {n:'海ほたる/木更津',km:140,drv:2.8,toll:2400,dir:'south'},{n:'秩父',km:170,drv:4.0,toll:2600,dir:'north'},
+  {n:'箱根',km:180,drv:4.2,toll:3000,dir:'west'},{n:'伊豆(熱海)',km:200,drv:4.4,toll:3400,dir:'west'},
+  {n:'河口湖・富士',km:220,drv:4.6,toll:3600,dir:'west'},{n:'日光',km:280,drv:5.6,toll:4800,dir:'north'},
+  {n:'房総(鴨川)',km:300,drv:6.0,toll:3000,dir:'south'},{n:'軽井沢',km:320,drv:6.2,toll:5800,dir:'west'},{n:'那須',km:380,drv:7.0,toll:6200,dir:'north'},
 ];
+const DIRLBL={near:'近',west:'西',south:'南',north:'北'};
 
-let DB=loadDB(); let cls=lsGet('dj_cls')||'middle'; let rvCls='basic';
-function loadDB(){const s=lsGet('dj_db');if(s){try{return JSON.parse(s);}catch(e){}}return structuredClone(DEFAULTS);}
+let DB=loadDB(); let cls=lsGet('dj_cls')||'middle'; let rvCls='basic'; let dirF='all'; let useHwy=true;
+function loadDB(){const s=lsGet('dj_db');if(s){try{const o=JSON.parse(s);if(o.carshare&&o.carshare[0].url)return o;}catch(e){}}return structuredClone(DEFAULTS);}
 function saveDB(){lsSet('dj_db',JSON.stringify(DB));}
 
 const $=id=>document.getElementById(id);
@@ -389,9 +439,9 @@ function calc(){
     <div class="winner"><div class="vlab">最安</div>
       <div class="vmain">${win.name} · <span class="px">${yen(win.grand)}</span>${t.ppl>1?` <span style="font-size:13px;color:var(--teal)">/ 1人 ${yen(win.per)}</span>`:''}</div>
       <div class="vsub">${vsub}</div></div>
-    <div class="sec-h">カーシェア <span style="color:var(--ink-faint);font-weight:500">最安 ${yen(cheapCS)}</span></div>
+    <div class="sec-h">カーシェア <span>最安 ${yen(cheapCS)}</span></div>
     <div class="lb">${all.filter(r=>r.cat==='carshare').map((r,i)=>opCard(r,i,r.grand===cheapCS,t.ppl)).join('')}</div>
-    <div class="sec-h">レンタカー <span style="color:var(--ink-faint);font-weight:500">最安 ${yen(cheapRC)}</span></div>
+    <div class="sec-h">レンタカー <span>最安 ${yen(cheapRC)}</span></div>
     <div class="lb">${all.filter(r=>r.cat==='rentcar').map((r,i)=>opCard(r,i,r.grand===cheapRC,t.ppl)).join('')}</div>
     ${warnings(t)}`;
   bindCards();
@@ -416,9 +466,11 @@ function warnings(t){
   return w;
 }
 
+/* reverse */
 function rvCalc(){
   const time=num('rvTime'),budget=num('rvBudget'),ppl=Math.max(1,Math.round(num('rvPpl'))||1),stay=num('rvStay');
-  const rows=DEST.map(d=>{
+  let list=DEST.filter(d=>dirF==='all'||d.dir===dirF);
+  const rows=list.map(d=>{
     const hours=d.drv+stay;
     const all=computeAll(d.km,hours,false,d.toll,rvCls,num('kmpl'),num('gas'),num('cdw'),$('cdwOn').checked);
     const best=all.sort((a,b)=>a.grand-b.grand)[0];
@@ -427,29 +479,43 @@ function rvCalc(){
   const okRows=rows.filter(r=>r.ok).sort((a,b)=>a.per-b.per);
   const noRows=rows.filter(r=>!r.ok).sort((a,b)=>a.per-b.per);
   const maxPer=Math.max(budget,...okRows.map(r=>r.per));
-  const html=r=>`<div class="rvrow ${r.ok?'':'no'}"><div class="rn"><div class="t">${r.n}</div>
+  const html=r=>`<div class="rvrow ${r.ok?'':'no'}"><div class="rn"><div class="t">${r.n}<span class="dir">${DIRLBL[r.dir]}</span></div>
     <div class="d">往復${r.km}km ・ ${r.hours.toFixed(1)}h ・ 最安 ${r.best}</div>
     ${r.ok?`<div class="rvbar"><i style="width:${Math.min(100,r.per/maxPer*100)}%"></i></div>`:''}</div>
     <div class="rp"><div class="pp">${yen(r.per)}</div><div class="pv">/人${r.hours>time?' ・時間超':(r.per>budget?' ・予算超':'')}</div></div></div>`;
   $('rvResult').innerHTML=`
-    <div class="winner" style="margin-bottom:12px"><div class="vlab">${time}h以内 / 予算¥${budget.toLocaleString('ja-JP')}・人</div>
+    <div class="winner" style="margin-bottom:12px"><div class="vlab">${time}h以内 / 予算¥${budget.toLocaleString('ja-JP')}・人${dirF!=='all'?' / '+DIRLBL[dirF]+'方面':''}</div>
       <div class="vmain" style="font-size:18px">${okRows.length}ヶ所が条件内</div>
-      <div class="vsub">${okRows.length?'安い順に表示。バーは予算に対する余裕。':'条件を満たす行き先なし。時間か予算を上げてみて。'}</div></div>
+      <div class="vsub">${okRows.length?'安い順に表示。バーは予算に対する余裕。':'条件を満たす行き先なし。時間か予算を上げるか方面を変えてみて。'}</div></div>
     <div class="rv">${okRows.map(html).join('')}</div>
     ${noRows.length?`<div class="sec-h">条件外（参考）</div><div class="rv">${noRows.map(html).join('')}</div>`:''}`;
 }
 
-const DARK_MAP=[{elementType:'geometry',stylers:[{color:'#1a2433'}]},{elementType:'labels.text.stroke',stylers:[{color:'#0d1117'}]},{elementType:'labels.text.fill',stylers:[{color:'#8896a5'}]},{featureType:'poi',stylers:[{visibility:'off'}]},{featureType:'transit',stylers:[{visibility:'off'}]},{featureType:'road',elementType:'geometry',stylers:[{color:'#28323f'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#46566a'}]},{featureType:'road',elementType:'labels.icon',stylers:[{visibility:'off'}]},{featureType:'water',elementType:'geometry',stylers:[{color:'#0f1722'}]},{featureType:'administrative',elementType:'geometry',stylers:[{color:'#33414f'}]},{featureType:'landscape',elementType:'geometry',stylers:[{color:'#161e29'}]}];
-let mapsReady=false,map,dirSvc,dirRenderer,acOrigin,placeOrigin=null,stops=[];
+/* cars tab */
+function renderCars(){
+  const all=[...DB.carshare.map(o=>({...o,cat:'カーシェア'})),...DB.rentcar.map(o=>({...o,cat:'レンタカー'}))];
+  $('carsResult').innerHTML=all.map(op=>{
+    const b=(MODELS.basic[op.id]||[]).map(m=>`<span class="cc">${m}</span>`).join('');
+    const m=(MODELS.middle[op.id]||[]).map(x=>`<span class="cc">${x}</span>`).join('');
+    return `<div class="carblk"><div class="ch"><div class="cn">${op.name}<span style="font-size:9px;color:var(--ink-faint);font-weight:500">${op.cat}</span></div>
+      <a href="${op.url}" target="_blank" rel="noopener">公式車種ページ ↗</a></div>
+      <div class="row"><div class="col"><div class="lbl">ベーシック / コンパクト</div><div class="list">${b||'<span class="cc">—</span>'}</div></div>
+      <div class="col"><div class="lbl">ミドル / SUV・中型</div><div class="list">${m||'<span class="cc">—</span>'}</div></div></div></div>`;
+  }).join('');
+}
+
+/* ===== Google Maps ===== */
+const LIGHT_MAP=[{elementType:'geometry',stylers:[{color:'#f3ede1'}]},{elementType:'labels.text.fill',stylers:[{color:'#8a8170'}]},{elementType:'labels.text.stroke',stylers:[{color:'#fbf8f2'}]},{featureType:'poi',stylers:[{visibility:'off'}]},{featureType:'transit',stylers:[{visibility:'off'}]},{featureType:'road',elementType:'geometry',stylers:[{color:'#ffffff'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#f0d9bf'}]},{featureType:'road',elementType:'labels.icon',stylers:[{visibility:'off'}]},{featureType:'water',elementType:'geometry',stylers:[{color:'#cfe3e0'}]},{featureType:'landscape',elementType:'geometry',stylers:[{color:'#f6f0e6'}]},{featureType:'administrative',elementType:'geometry',stylers:[{color:'#e4d9c6'}]}];
+let mapsReady=false,map,dirSvc,dirRenderer,acOrigin,placeOrigin=null,originName='出発地',stops=[];
 window.__initMaps=function(){
   mapsReady=true;
   try{
-    map=new google.maps.Map($('map'),{center:{lat:35.705,lng:139.72},zoom:11,styles:DARK_MAP,disableDefaultUI:true,zoomControl:true,gestureHandling:'greedy'});
+    map=new google.maps.Map($('map'),{center:{lat:35.705,lng:139.72},zoom:11,styles:LIGHT_MAP,disableDefaultUI:true,zoomControl:true,gestureHandling:'greedy'});
     dirSvc=new google.maps.DirectionsService();
-    dirRenderer=new google.maps.DirectionsRenderer({map,suppressMarkers:false,polylineOptions:{strokeColor:'#ffb347',strokeWeight:5,strokeOpacity:.9}});
+    dirRenderer=new google.maps.DirectionsRenderer({map,suppressMarkers:false,polylineOptions:{strokeColor:'#d9772b',strokeWeight:5,strokeOpacity:.9}});
     const opt={fields:['geometry','name'],componentRestrictions:{country:'jp'}};
     acOrigin=new google.maps.places.Autocomplete($('origin'),opt);
-    acOrigin.addListener('place_changed',()=>{const p=acOrigin.getPlace();placeOrigin=(p&&p.geometry)?p:null;computeRoute();});
+    acOrigin.addListener('place_changed',()=>{const p=acOrigin.getPlace();placeOrigin=(p&&p.geometry)?p:null;originName=(p&&p.name)||$('origin').value||'出発地';computeRoute();});
     addStop();
     $('map').style.display='block';$('legs').style.display='block';
     $('routeStatus').className='status ok';$('routeStatus').textContent='✓ 地図有効。出発地と目的地を選択';
@@ -458,32 +524,45 @@ window.__initMaps=function(){
 };
 function makeStopRow(){
   const wrap=document.createElement('div');wrap.className='stop';
-  const idx=stops.length+1;
-  wrap.innerHTML=`<div class="pin">${idx}</div><div class="inputbox"><input class="txt" placeholder="目的地・立ち寄り先" autocomplete="off"></div><button class="rm">×</button>`;
+  wrap.innerHTML=`<div class="pin">${stops.length+1}</div><div class="inputbox"><input class="txt" placeholder="目的地・立ち寄り先" autocomplete="off"></div>
+    <div class="ord"><button class="up">▲</button><button class="dn">▼</button></div><button class="rm">×</button>`;
   $('stops').appendChild(wrap);
   const input=wrap.querySelector('input');
-  const obj={wrap,input,place:null,ac:null};
-  if(mapsReady){obj.ac=new google.maps.places.Autocomplete(input,{fields:['geometry','name'],componentRestrictions:{country:'jp'}});obj.ac.addListener('place_changed',()=>{const p=obj.ac.getPlace();obj.place=(p&&p.geometry)?p:null;computeRoute();});}
+  const obj={wrap,input,place:null,name:'',ac:null};
+  if(mapsReady){obj.ac=new google.maps.places.Autocomplete(input,{fields:['geometry','name'],componentRestrictions:{country:'jp'}});obj.ac.addListener('place_changed',()=>{const p=obj.ac.getPlace();obj.place=(p&&p.geometry)?p:null;obj.name=(p&&p.name)||input.value;computeRoute();});}
   wrap.querySelector('.rm').onclick=()=>{stops=stops.filter(s=>s!==obj);wrap.remove();renumber();computeRoute();};
+  wrap.querySelector('.up').onclick=()=>moveStop(obj,-1);
+  wrap.querySelector('.dn').onclick=()=>moveStop(obj,1);
   stops.push(obj);
+}
+function moveStop(obj,dir){
+  const i=stops.indexOf(obj),j=i+dir;
+  if(j<0||j>=stops.length)return;
+  stops.splice(i,1);stops.splice(j,0,obj);
+  stops.forEach(s=>$('stops').appendChild(s.wrap));
+  renumber();computeRoute();
 }
 function renumber(){[...$('stops').children].forEach((el,i)=>el.querySelector('.pin').textContent=i+1);}
 function addStop(){if(stops.length>=8)return;makeStopRow();}
-function computeRoute(){
+function computeRoute(opt){
   if(!mapsReady||!placeOrigin)return;
   const filled=stops.filter(s=>s.place);
   if(filled.length<1)return;
   const pts=filled.map(s=>({location:s.place.geometry.location,stopover:true}));
   $('routeStatus').className='status wait';$('routeStatus').textContent='ルート計算中…';
-  dirSvc.route({origin:placeOrigin.geometry.location,destination:placeOrigin.geometry.location,waypoints:pts,travelMode:google.maps.TravelMode.DRIVING},(r,st)=>{
+  dirSvc.route({origin:placeOrigin.geometry.location,destination:placeOrigin.geometry.location,waypoints:pts,optimizeWaypoints:!!opt,avoidHighways:!useHwy,travelMode:google.maps.TravelMode.DRIVING},(r,st)=>{
     if(st==='OK'){
+      if(opt&&r.routes[0].waypoint_order){const ord=r.routes[0].waypoint_order;const newFilled=ord.map(i=>filled[i]);const others=stops.filter(s=>!s.place);stops=[...newFilled,...others];stops.forEach(s=>$('stops').appendChild(s.wrap));renumber();}
       dirRenderer.setDirections(r);
-      let m=0,sec=0;const legNotes=[];
-      r.routes[0].legs.forEach((leg,i)=>{m+=leg.distance.value;sec+=leg.duration.value;legNotes.push('区間'+(i+1)+': '+(leg.distance.value/1000).toFixed(1)+'km / '+Math.round(leg.duration.value/60)+'分');});
+      let m=0,sec=0;r.routes[0].legs.forEach(leg=>{m+=leg.distance.value;sec+=leg.duration.value;});
       route.km=m/1000;route.driveH=sec/3600;
-      $('routeStatus').className='status ok';$('routeStatus').textContent='✓ 合計 '+route.km.toFixed(1)+'km / 運転'+route.driveH.toFixed(1)+'h（出発地に戻る）';
+      const names=[originName,...stops.filter(s=>s.place).map(s=>s.name||'地点'),originName];
+      const legNotes=r.routes[0].legs.map((leg,i)=>'<b>'+names[i]+'→'+names[i+1]+'</b> '+(leg.distance.value/1000).toFixed(1)+'km');
+      $('routeStatus').className='status ok';$('routeStatus').textContent='✓ 合計 '+route.km.toFixed(1)+'km / 運転'+route.driveH.toFixed(1)+'h（'+(useHwy?'高速あり':'下道')+'・出発地に戻る）';
       $('legs').innerHTML=legNotes.join('　/　');
-      if(num('toll')===0)$('toll').value=Math.round(route.km/2*24/100)*100;
+      const est=useHwy?Math.round(route.km*num('tollkm')/50)*50:0;
+      $('toll').value=est;
+      $('tollHint').textContent=useHwy?('高速概算 '+yen(est)+'（@¥'+num('tollkm')+'/km）'):'下道のため高速代¥0';
       calc();
     }else{$('routeStatus').className='status err';$('routeStatus').textContent='ルート取得失敗：'+st;}
   });
@@ -502,7 +581,7 @@ function activateMaps(key){
 function renderSettings(){
   $('clsLabel').textContent=cls==='middle'?'ミドル':'ベーシック';
   const csF=[['p6','6h'],['p12','12h'],['p24','24h'],['pn','夜間'],['per','時間'],['km','¥/km']];
-  $('csSettings').innerHTML='<div class="glob" style="color:var(--amber)">カーシェア</div>'+DB.carshare.map(op=>{const c=op.classes[cls];
+  $('csSettings').innerHTML='<div class="glob" style="color:var(--amber-deep)">カーシェア</div>'+DB.carshare.map(op=>{const c=op.classes[cls];
     return `<div class="opset"><div class="h">${op.name}</div><div class="g">${csF.map(f=>`<div class="f"><label>${f[1]}</label><div class="inputbox"><input type="number" data-cat="carshare" data-id="${op.id}" data-k="${f[0]}" value="${c[f[0]]}"></div></div>`).join('')}</div></div>`;}).join('');
   const rcF=[['r6','6h'],['r12','12h'],['r24','24h'],['rday','+1日']];
   $('rcSettings').innerHTML='<div class="glob" style="color:var(--blue)">レンタカー（基本料金）</div>'+DB.rentcar.map(op=>{const c=op.classes[cls];
@@ -512,20 +591,23 @@ function renderSettings(){
 
 $('classSeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('classSeg').querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');cls=b.dataset.c;lsSet('dj_cls',cls);renderSettings();calc();});
 $('rvClassSeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('rvClassSeg').querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');rvCls=b.dataset.c;rvCalc();});
-['stay','ppl','toll','distM','driveM','kmpl','gas','cdw'].forEach(id=>$(id).addEventListener('input',calc));
+$('dirFilter').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('dirFilter').querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');dirF=b.dataset.d;rvCalc();});
+$('hwySeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('hwySeg').querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');useHwy=b.dataset.hwy==='1';computeRoute();});
+['stay','ppl','toll','distM','driveM','kmpl','gas','cdw','tollkm'].forEach(id=>$(id).addEventListener('input',calc));
 ['night','cdwOn'].forEach(id=>$(id).addEventListener('change',()=>{calc();}));
 ['rvTime','rvBudget','rvPpl','rvStay'].forEach(id=>$(id).addEventListener('input',rvCalc));
 $('addStop').onclick=addStop;
+$('optBtn').onclick=()=>computeRoute(true);
 $('accH').onclick=()=>$('acc').classList.toggle('open');
 $('keyBtn').onclick=()=>activateMaps($('apiKey').value.trim());
 $('resetBtn').onclick=()=>{DB=structuredClone(DEFAULTS);saveDB();renderSettings();calc();};
 $('manualToggle').onclick=()=>{const m=$('manualInputs'),g=$('mapsInputs');const toM=m.style.display==='none';m.style.display=toM?'block':'none';g.style.display=toM?'none':'block';$('manualToggle').textContent=toM?'地図に戻す':'手入力';calc();};
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
-  const t=b.dataset.tab;$('tab-compare').style.display=t==='compare'?'block':'none';$('tab-reverse').style.display=t==='reverse'?'block':'none';
-  if(t==='reverse')rvCalc();
+  const t=b.dataset.tab;$('tab-compare').style.display=t==='compare'?'block':'none';$('tab-reverse').style.display=t==='reverse'?'block':'none';$('tab-cars').style.display=t==='cars'?'block':'none';
+  if(t==='reverse')rvCalc();if(t==='cars')renderCars();
 });
-$('aboutLnk').onclick=()=>alert('料金モデル：各社公式の料金ページ（三井／タイムズ／オリックス／トヨタ・ニッポン・オリックス・格安系レンタカー）をもとにした2025末〜2026改定後の標準目安。各社にAPIは無いため自動取得不可、⚙︎で上書き・保存できる。\n\n距離モデル：三井=6時間内0円/超過は全km、タイムズ=20km超分のみ、オリックス=全km。\n\nGoogle Maps料金：2025年3月以降はSKUごとに月間無料枠（動的地図など Essentials は各1万回/月）。個人の手動利用なら通常は無料枠内（¥0）。キーには必ずリファラー制限を。心配ならCloudで予算アラート/上限を設定。');
+$('aboutLnk').onclick=()=>alert('料金モデル：各社公式の料金・車種ページ（三井／タイムズ／オリックス／トヨタ・ニッポン・オリックス・格安系）をもとにした2025末〜2026改定後の標準目安。各社にAPIは無く自動取得不可、⚙︎で上書き保存可。\n\n距離モデル：三井=6時間内0円/超過は全km、タイムズ=20km超分のみ、オリックス=全km。\n\n高速代：Googleは日本の通行料金を返さないため距離からの概算。正確な額は「NEXCOで調べる」リンクから。\n\nGoogle Maps料金：2025年3月以降SKUごとに月間無料枠（Essentialsは各1万回/月）。個人の手動利用は通常¥0。キーにはリファラー制限を。');
 
 $('classSeg').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.c===cls));
 renderSettings();
