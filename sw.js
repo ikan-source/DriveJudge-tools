@@ -1,5 +1,5 @@
 /* Drive Judge — minimal service worker (app-shell cache) */
-const CACHE = 'drive-judge-v2';
+const CACHE = 'drive-judge-v3';
 const SHELL = ['./', './index.html', './manifest.json', './icon.svg'];
 
 self.addEventListener('install', e => {
