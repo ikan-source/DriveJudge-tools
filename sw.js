@@ -1,5 +1,5 @@
-/* Drive Judge — minimal service worker (app-shell cache) */
-const CACHE = 'drive-judge-v4';
+/* Drive Judge — service worker (network-first for app files, auto-update) */
+const CACHE = 'drive-judge-v7';
 const SHELL = ['./', './index.html', './manifest.json', './icon.svg'];
 
 self.addEventListener('install', e => {
@@ -14,19 +14,25 @@ self.addEventListener('activate', e => {
 });
 
 self.addEventListener('fetch', e => {
+  if (e.request.method !== 'GET') return;
   const url = new URL(e.request.url);
-  // Never cache Google Maps / Fonts — always go to network
-  if (url.host.includes('googleapis.com') || url.host.includes('gstatic.com') || url.host.includes('google.com')) {
-    return; // default network handling
+  // Google Maps / Fonts: let the network handle it (never cache)
+  if (url.host.includes('googleapis.com') || url.host.includes('gstatic.com') || url.host.includes('google.com')) return;
+
+  // Same-origin app files: NETWORK-FIRST so opening online always gets the latest.
+  // Falls back to cache only when offline.
+  if (url.origin === self.location.origin) {
+    e.respondWith(
+      fetch(e.request).then(resp => {
+        if (resp && resp.status === 200) {
+          const copy = resp.clone();
+          caches.open(CACHE).then(c => c.put(e.request, copy));
+        }
+        return resp;
+      }).catch(() => caches.match(e.request).then(hit => hit || caches.match('./index.html')))
+    );
+    return;
   }
-  // App shell: cache-first, fall back to network
-  e.respondWith(
-    caches.match(e.request).then(hit => hit || fetch(e.request).then(resp => {
-      if (resp && resp.status === 200 && e.request.method === 'GET') {
-        const copy = resp.clone();
-        caches.open(CACHE).then(c => c.put(e.request, copy));
-      }
-      return resp;
-    }).catch(() => caches.match('./index.html')))
-  );
+  // Anything else: cache-first
+  e.respondWith(caches.match(e.request).then(hit => hit || fetch(e.request)));
 });

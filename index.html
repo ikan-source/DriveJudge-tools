@@ -36,7 +36,7 @@
   h1 .vs{color:var(--ink-faint);font-weight:500;font-size:18px;margin:0 7px;font-family:var(--ui)}
 
   .tabs{display:flex;gap:6px;background:var(--panel2);padding:5px;border-radius:13px;border:1px solid var(--line);margin-bottom:14px}
-  .tabs button{flex:1;padding:11px 4px;border:none;background:none;color:var(--ink-dim);font-family:var(--ui);font-size:12.5px;font-weight:700;border-radius:9px;cursor:pointer;transition:.15s}
+  .tabs button{flex:1;padding:11px 4px;border:none;background:none;color:var(--ink-dim);font-family:var(--ui);font-size:13px;font-weight:700;border-radius:9px;cursor:pointer;transition:.15s}
   .tabs button.on{background:var(--panel);color:var(--amber);box-shadow:0 1px 5px rgba(120,90,40,.12)}
 
   .card{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:14px;box-shadow:0 2px 14px rgba(140,110,60,.06)}
@@ -88,8 +88,8 @@
   .row2{display:grid;grid-template-columns:1fr 1fr;gap:11px}
   .mt{margin-top:12px}
   .seg{display:flex;gap:5px;background:var(--bg2);padding:4px;border-radius:11px;border:1px solid var(--line)}
-  .seg button{flex:1;padding:9px 6px;border:none;background:none;color:var(--ink-dim);font-family:var(--ui);font-size:12px;font-weight:500;border-radius:8px;cursor:pointer;transition:.15s;line-height:1.2}
-  .seg button small{display:block;font-size:9.5px;color:var(--ink-faint);margin-top:2px}
+  .seg button{flex:1;padding:9px 4px;border:none;background:none;color:var(--ink-dim);font-family:var(--ui);font-size:11.5px;font-weight:500;border-radius:8px;cursor:pointer;transition:.15s;line-height:1.2}
+  .seg button small{display:block;font-size:9px;color:var(--ink-faint);margin-top:2px}
   .seg button.on{background:var(--panel);color:var(--amber);box-shadow:0 1px 4px rgba(120,90,40,.12);font-weight:700}
   .seg button.on small{color:var(--amber-deep)}
 
@@ -147,33 +147,26 @@
   .note{font-size:11px;color:var(--ink-dim);line-height:1.6;margin-top:12px;padding:11px 13px;background:var(--bg2);border-radius:11px;border:1px solid var(--line)}
   .note b{color:var(--rose)} .note.tip b{color:var(--amber-deep)}
 
-  .filterbar{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
-  .filterbar button{padding:7px 13px;border-radius:9px;border:1px solid var(--line);background:var(--bg2);color:var(--ink-dim);font-family:var(--ui);font-size:12px;font-weight:500;cursor:pointer;transition:.15s}
-  .filterbar button.on{background:var(--amber);color:#fff;border-color:var(--amber)}
-  .rv{display:flex;flex-direction:column;gap:8px;margin-top:4px}
-  .rvrow{display:flex;align-items:center;gap:11px;background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;box-shadow:0 1px 8px rgba(140,110,60,.05)}
-  .rvrow .rn{flex:1;min-width:0}
-  .rvrow .rn .t{font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:7px}
-  .rvrow .rn .t .dir{font-size:9px;font-weight:700;color:var(--amber-deep);background:var(--glow);border-radius:5px;padding:2px 6px}
-  .rvrow .rn .d{font-size:10.5px;color:var(--ink-faint);font-family:var(--mono);margin-top:3px}
-  .rvrow .rp{text-align:right;flex:0 0 auto}
-  .rvrow .rp .pp{font-family:var(--mono);font-size:16px;font-weight:500}
-  .rvrow .rp .pv{font-size:10px;color:var(--ink-faint);margin-top:1px}
-  .rvrow.no{opacity:.45}
-  .rvbar{height:4px;background:var(--line);border-radius:2px;overflow:hidden;margin-top:7px}
-  .rvbar i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),var(--green))}
-
-  /* car tab */
   .carblk{border:1px solid var(--line);border-radius:13px;padding:14px;margin-bottom:11px;background:var(--panel);box-shadow:0 1px 8px rgba(140,110,60,.05)}
   .carblk .ch{display:flex;align-items:center;justify-content:space-between;margin-bottom:9px}
   .carblk .ch .cn{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px}
   .carblk .ch a{font-size:11px;color:var(--blue);text-decoration:none;font-weight:500;display:flex;align-items:center;gap:3px}
   .carblk .ch a:hover{text-decoration:underline}
-  .carblk .row{display:flex;gap:14px}
-  .carblk .col{flex:1}
+  .carblk .crow{display:flex;flex-wrap:wrap;gap:10px}
+  .carblk .col{flex:1;min-width:46%}
   .carblk .col .lbl{font-size:10px;color:var(--ink-faint);font-weight:700;margin-bottom:5px;letter-spacing:.05em}
   .carblk .col .list{display:flex;flex-wrap:wrap;gap:5px}
   .carblk .col .cc{font-size:10.5px;color:var(--ink-dim);background:var(--bg2);border:1px solid var(--line);border-radius:6px;padding:3px 7px}
+
+  .rt{background:var(--panel);border:1px solid var(--line);border-radius:13px;padding:13px 14px;margin-bottom:9px;box-shadow:0 1px 8px rgba(140,110,60,.05)}
+  .rt .rh{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+  .rt .rh .nm{font-size:14px;font-weight:700}
+  .rt .rh .meta{font-size:10.5px;color:var(--ink-faint);font-family:var(--mono);white-space:nowrap}
+  .rt .chain{font-size:11px;color:var(--ink-dim);line-height:1.6;margin:7px 0 11px}
+  .rt .acts{display:flex;gap:7px}
+  .rt .acts button{flex:1;padding:9px;border-radius:9px;border:1px solid var(--line);font-family:var(--ui);font-size:11.5px;font-weight:700;cursor:pointer;background:var(--panel2);color:var(--ink-dim)}
+  .rt .acts button.go{background:var(--amber);color:#fff;border-color:var(--amber)}
+  .rt .acts button.del{flex:0 0 48px;color:var(--rose)}
 
   .acc{margin-top:2px}
   .acc-h{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:13px 16px;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);font-size:12.5px;color:var(--ink-dim);font-weight:500;box-shadow:0 1px 8px rgba(140,110,60,.05)}
@@ -194,6 +187,7 @@
 
   footer{text-align:center;color:var(--ink-faint);font-size:10.5px;line-height:1.7;margin-top:18px;padding:0 8px}
   footer .lnk{color:var(--ink-dim);text-decoration:underline;cursor:pointer}
+  footer .ver{color:var(--amber-deep);font-weight:700}
 
   .pac-container{background:var(--panel)!important;border:1px solid var(--line2)!important;border-radius:11px!important;margin-top:6px!important;box-shadow:0 12px 30px rgba(120,90,40,.18)!important;font-family:var(--ui)!important;overflow:hidden}
   .pac-container:after{display:none!important}
@@ -209,14 +203,14 @@
 <div class="wrap">
 
   <header>
-    <div class="kicker">Drive Cost Judge · v4</div>
+    <div class="kicker">Drive Cost Judge · v6</div>
     <h1>カーシェア<span class="vs">vs</span>レンタカー</h1>
   </header>
 
   <div class="tabs">
-    <button data-tab="compare" class="on">比較する</button>
-    <button data-tab="reverse">逆引き</button>
-    <button data-tab="cars">車種一覧</button>
+    <button data-tab="compare" class="on">比較</button>
+    <button data-tab="cars">車種</button>
+    <button data-tab="routes">ルート</button>
   </div>
 
   <!-- ===== COMPARE ===== -->
@@ -238,6 +232,7 @@
         <div class="legs" id="legs"></div>
         <div class="tollrow"><span style="font-size:11px;color:var(--ink-faint)" id="tollHint"></span><a href="https://www.driveplaza.com/dp/SearchTop" target="_blank" rel="noopener">NEXCOで正確に調べる ↗</a></div>
         <div class="status wait" id="routeStatus"></div>
+        <button class="btn ghost" id="saveRouteBtn" style="width:100%;padding:11px;margin-top:10px">★ このルートを保存</button>
       </div>
       <div id="manualInputs" style="display:none">
         <div class="row2">
@@ -253,8 +248,10 @@
       <div class="card-t"><div class="l"><span class="dot"></span>条件</div></div>
       <label>車格</label>
       <div class="seg" id="classSeg">
-        <button data-c="basic">ベーシック<small>ヤリス級・コンパクト</small></button>
-        <button data-c="middle" class="on">ミドル<small>CX-5級・SUV</small></button>
+        <button data-c="basic">ベーシック<small>コンパクト</small></button>
+        <button data-c="middle" class="on">ミドル<small>SUV・中型</small></button>
+        <button data-c="premium">プレミアム<small>スポーツ上級</small></button>
+        <button data-c="luxury">高級<small>輸入・大型</small></button>
       </div>
       <div class="row3 mt">
         <div><label>滞在時間</label><div class="inputbox"><input type="number" id="stay" inputmode="decimal" step="0.5" value="2"><span class="unit">h</span></div></div>
@@ -268,9 +265,20 @@
     <div id="result"></div>
 
     <div class="acc" id="acc">
-      <div class="acc-h" id="accH"><span>⚙︎ 各社の料金パラメータを編集</span><span class="arr">▾</span></div>
+      <div class="acc-h" id="accH"><span>⚙︎ データ・料金パラメータ</span><span class="arr">▾</span></div>
       <div class="acc-b">
-        <div style="font-size:11px;color:var(--ink-faint);line-height:1.55;margin-bottom:12px">既定値は各社公表料金（2025末〜2026改定後）の標準会員・標準シーズン目安。実勢に合わせ上書きで保存。表示中の車格＝<b id="clsLabel" style="color:var(--amber-deep)">ミドル</b>。</div>
+        <div class="opset"><div class="h">データCSV（1ファイルで全社・全クラス管理）</div>
+          <div style="font-size:10.5px;color:var(--ink-faint);line-height:1.55;margin-bottom:10px">現在の料金をCSVで書き出し→Excel等で編集→読み込みで上書き保存。各社が値上げしたらここを更新すれば全部反映されます。</div>
+          <div class="routebtns" style="margin-top:0">
+            <button class="btn ghost" id="csvExport" style="flex:1">CSV書き出し</button>
+            <label class="btn amber" style="flex:1;cursor:pointer">CSV読み込み<input type="file" id="csvFile" accept=".csv,text/csv" style="display:none"></label>
+          </div>
+          <div class="row2" style="margin-top:11px">
+            <div><label>料金 最終確認日</label><div class="inputbox"><input class="txt" id="verified" placeholder="2026-06"></div></div>
+            <div><label>表示中の車格</label><div class="inputbox" style="pointer-events:none"><input class="txt" id="clsLabel" value="ミドル" readonly></div></div>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--ink-faint);line-height:1.55;margin-bottom:12px">下の編集は<b style="color:var(--amber-deep)">表示中の車格のみ</b>。既定値は各社公表料金（2026改定後）をもとにした目安で、プレミアム/高級は推定を含むため<b style="color:var(--rose)">要確認</b>。実勢に合わせ上書き保存できます。</div>
         <div id="csSettings"></div>
         <div class="glob" style="color:var(--blue)">レンタカー共通／高速概算</div>
         <div class="opset"><div class="g">
@@ -286,48 +294,28 @@
     </div>
   </div>
 
-  <!-- ===== REVERSE ===== -->
-  <div id="tab-reverse" style="display:none">
-    <div class="card">
-      <div class="card-t"><div class="l"><span class="dot"></span>条件を決めると、早稲田から行ける範囲を提案</div></div>
-      <div class="row3">
-        <div><label>制限時間</label><div class="inputbox"><input type="number" id="rvTime" inputmode="decimal" step="0.5" value="6"><span class="unit">h</span></div></div>
-        <div><label>予算/人</label><div class="inputbox"><span class="unit" style="padding:0 3px 0 0">¥</span><input type="number" id="rvBudget" inputmode="numeric" value="3000"></div></div>
-        <div><label>人数</label><div class="inputbox"><input type="number" id="rvPpl" inputmode="numeric" value="1" min="1"><span class="unit">人</span></div></div>
-      </div>
-      <div class="row2 mt">
-        <div><label>各地での滞在</label><div class="inputbox"><input type="number" id="rvStay" inputmode="decimal" step="0.5" value="2"><span class="unit">h</span></div></div>
-        <div><label>車格</label>
-          <div class="seg" id="rvClassSeg" style="height:42px">
-            <button data-c="basic" class="on" style="font-size:11px">ベーシック</button>
-            <button data-c="middle" style="font-size:11px">ミドル</button>
-          </div>
-        </div>
-      </div>
-      <label style="margin-top:13px">方面でしぼる</label>
-      <div class="filterbar" id="dirFilter">
-        <button data-d="all" class="on">すべて</button>
-        <button data-d="near">近場</button>
-        <button data-d="west">西（箱根・富士方面）</button>
-        <button data-d="south">南（湘南・房総方面）</button>
-        <button data-d="north">北（秩父・日光方面）</button>
-      </div>
-    </div>
-    <div id="rvResult"></div>
-  </div>
-
   <!-- ===== CARS ===== -->
   <div id="tab-cars" style="display:none">
     <div class="card" style="margin-bottom:12px">
       <div class="card-t"><div class="l"><span class="dot"></span>各社の代表車種（クラス別）</div></div>
-      <div style="font-size:11.5px;color:var(--ink-dim);line-height:1.6">下の代表例は目安。実際の在庫・写真は各社の公式車種ページ（リンク）で確認を。ベーシック＝コンパクト、ミドル＝SUV/中型の相当クラス。</div>
+      <div style="font-size:11.5px;color:var(--ink-dim);line-height:1.6">下の代表例は目安。実際の在庫・写真は各社の公式車種ページ（リンク）で確認を。クラスは ベーシック→ミドル→プレミアム→高級 の順。</div>
     </div>
     <div id="carsResult"></div>
   </div>
 
+  <!-- ===== ROUTES ===== -->
+  <div id="tab-routes" style="display:none">
+    <div class="card" style="margin-bottom:12px">
+      <div class="card-t"><div class="l"><span class="dot"></span>マイルート（保存した兜风コース）</div></div>
+      <div style="font-size:11.5px;color:var(--ink-dim);line-height:1.6">比較タブでルートを組んで「★ このルートを保存」で登録。ここから1タップで呼び出して再計算、または Google Maps でナビ起動。端末内に保存。</div>
+    </div>
+    <div id="routesResult"></div>
+  </div>
+
   <footer>
     料金は目安。カーシェアはガソリン・保険込み／レンタカーは満タン返し・距離無制限で計算。<br>
-    高速代は距離からの概算（日本の正確な料金はNEXCOで）。<span class="lnk" id="aboutLnk">データ・コストについて</span>
+    高速代は距離からの概算（正確な額はNEXCOで）。料金 最終確認: <span class="ver" id="verFoot">2026-06</span><br>
+    <span class="lnk" id="aboutLnk">データ・コストについて</span>
   </footer>
 </div>
 
@@ -336,42 +324,57 @@ const mem={};
 function lsGet(k){try{return localStorage.getItem(k);}catch(e){return mem[k]??null;}}
 function lsSet(k,v){try{localStorage.setItem(k,v);}catch(e){mem[k]=v;}}
 
+const CLASSES=['basic','middle','premium','luxury'];
+const CLABEL={basic:'ベーシック',middle:'ミドル',premium:'プレミアム',luxury:'高級'};
+
 const DEFAULTS={
   carshare:[
-    {id:'mitsui',name:'三井のカーシェアーズ',dist:'mitsui6h',url:'https://www.carshares.jp/car/',
-     classes:{basic:{p6:4280,p12:6700,p24:8800,pn:5200,unit:10,per:220,km:18},middle:{p6:5200,p12:7700,p24:9900,pn:6200,unit:10,per:260,km:20}}},
-    {id:'times',name:'タイムズカー',dist:'times20',free:20,url:'https://share.timescar.jp/',
-     classes:{basic:{p6:4290,p12:6600,p24:8800,pn:2640,unit:15,per:220,km:16},middle:{p6:5500,p12:7700,p24:9900,pn:3520,unit:15,per:330,km:16}}},
-    {id:'orix',name:'オリックスカーシェア',dist:'all',url:'https://www.orix-carshare.com/',
-     classes:{basic:{p6:4400,p12:6800,p24:9000,pn:4500,unit:15,per:220,km:18},middle:{p6:5500,p12:8000,p24:10500,pn:5500,unit:15,per:330,km:18}}},
+    {id:'mitsui',name:'三井のカーシェアーズ',dist:'mitsui6h',url:'https://www.carshares.jp/car/',classes:{
+      basic:{p6:4280,p12:6800,p24:7300,pn:3200,unit:10,per:150,km:21},
+      middle:{p6:5280,p12:7180,p24:8500,pn:4500,unit:10,per:190,km:23},
+      premium:{p6:6980,p12:9800,p24:12100,pn:0,unit:10,per:240,km:25},
+      luxury:{p6:9900,p12:13900,p24:16900,pn:0,unit:10,per:350,km:27}}},
+    {id:'times',name:'タイムズカー',dist:'times20',free:20,url:'https://share.timescar.jp/',classes:{
+      basic:{p6:4290,p12:5500,p24:6600,pn:2640,unit:15,per:220,km:20},
+      middle:{p6:5500,p12:6800,p24:8200,pn:3520,unit:15,per:330,km:20},
+      premium:{p6:7700,p12:9900,p24:12100,pn:4950,unit:15,per:440,km:20},
+      luxury:{p6:9900,p12:13200,p24:16500,pn:6600,unit:15,per:550,km:20}}},
+    {id:'orix',name:'オリックスカーシェア',dist:'all',url:'https://www.orix-carshare.com/',classes:{
+      basic:{p6:4400,p12:6600,p24:8500,pn:4500,unit:15,per:210,km:18},
+      middle:{p6:5500,p12:7800,p24:10000,pn:5500,unit:15,per:320,km:18},
+      premium:{p6:7200,p12:9800,p24:12500,pn:6500,unit:15,per:420,km:20},
+      luxury:{p6:9800,p12:13500,p24:17000,pn:8000,unit:15,per:540,km:22}}},
   ],
   rentcar:[
-    {id:'toyota',name:'トヨタレンタカー',url:'https://rent.toyota.co.jp/',classes:{basic:{r6:6050,r12:7150,r24:8800,rday:7040},middle:{r6:7700,r12:9900,r24:12100,rday:9900}}},
-    {id:'nippon',name:'ニッポンレンタカー',url:'https://www.nipponrentacar.co.jp/car_price/',classes:{basic:{r6:5500,r12:6600,r24:8030,rday:6490},middle:{r6:7480,r12:9460,r24:11550,rday:9240}}},
-    {id:'orixr',name:'オリックスレンタカー',url:'https://car.orix.co.jp/',classes:{basic:{r6:5390,r12:6490,r24:7700,rday:6160},middle:{r6:7150,r12:9020,r24:11000,rday:8800}}},
-    {id:'budget',name:'格安系（ニコニコ等）',url:'https://www.2525r.com/',classes:{basic:{r6:2530,r12:3850,r24:4730,rday:4180},middle:{r6:4180,r12:5280,r24:6380,rday:5500}}},
+    {id:'toyota',name:'トヨタレンタカー',url:'https://rent.toyota.co.jp/',classes:{
+      basic:{r6:6050,r12:7150,r24:8800,rday:7040},middle:{r6:7700,r12:9900,r24:12100,rday:9900},
+      premium:{r6:11000,r12:14300,r24:17600,rday:14000},luxury:{r6:18000,r12:24000,r24:30000,rday:24000}}},
+    {id:'nippon',name:'ニッポンレンタカー',url:'https://www.nipponrentacar.co.jp/car_price/',classes:{
+      basic:{r6:5500,r12:6600,r24:8030,rday:6490},middle:{r6:7480,r12:9460,r24:11550,rday:9240},
+      premium:{r6:10500,r12:13500,r24:16500,rday:13000},luxury:{r6:16000,r12:21000,r24:27000,rday:21000}}},
+    {id:'orixr',name:'オリックスレンタカー',url:'https://car.orix.co.jp/',classes:{
+      basic:{r6:5390,r12:6490,r24:7700,rday:6160},middle:{r6:7150,r12:9020,r24:11000,rday:8800},
+      premium:{r6:10000,r12:13000,r24:16000,rday:12800},luxury:{r6:15000,r12:20000,r24:26000,rday:20000}}},
+    {id:'budget',name:'格安系（ニコニコ等）',url:'https://www.2525r.com/',classes:{
+      basic:{r6:2530,r12:3850,r24:4730,rday:4180},middle:{r6:4180,r12:5280,r24:6380,rday:5500},
+      premium:{r6:6500,r12:8500,r24:10500,rday:8500},luxury:{r6:9000,r12:12000,r24:15000,rday:12000}}},
   ]
 };
 const MODELS={
-  basic:{mitsui:['ヤリス','アクア','ノート e-POWER','シエンタ','ライズ'],times:['アクア','ノート','フィット','ヤリス','ルーミー'],orix:['アクア','ノート','フィット','ヤリス'],toyota:['ヤリス','アクア','パッソ'],nippon:['ノート','フィット','ヤリス'],orixr:['ノート','フィット','ヤリス'],budget:['フィット','ノート','コンパクト各種']},
-  middle:{mitsui:['CX-5','RAV4','ハリアー','カローラクロス','フォレスター'],times:['カローラクロス','シエンタ','ヴォクシー','CX-30'],orix:['CX-30','ヴェゼル','カローラ','フォレスター'],toyota:['ハリアー','RAV4','カローラクロス'],nippon:['CX-5','エクストレイル','ハリアー'],orixr:['CX-30','ヴェゼル','カローラクロス'],budget:['ヴェゼル系','SUV相当']}
+  basic:{mitsui:['ヤリス','アクア','ノート e-POWER','シエンタ'],times:['アクア','ノート','フィット','ヤリス'],orix:['アクア','ノート','フィット'],toyota:['ヤリス','アクア','パッソ'],nippon:['ノート','フィット','ヤリス'],orixr:['ノート','フィット','ヤリス'],budget:['フィット','ノート','コンパクト各種']},
+  middle:{mitsui:['CX-5','RAV4','ハリアー','カローラクロス'],times:['カローラクロス','ヴォクシー','CX-30'],orix:['CX-30','ヴェゼル','フォレスター'],toyota:['ハリアー','RAV4','カローラクロス'],nippon:['CX-5','エクストレイル','ハリアー'],orixr:['CX-30','ヴェゼル','カローラクロス'],budget:['ヴェゼル系','SUV相当']},
+  premium:{mitsui:['ロードスター','GR86','MAZDA3 FB','レヴォーグ'],times:['アルファード','クラウン','エルグランド'],orix:['ハリアー','アルファード'],toyota:['アルファード','クラウン','ヴェルファイア'],nippon:['アルファード','ハリアー'],orixr:['アルファード','クラウン'],budget:['—']},
+  luxury:{mitsui:['ランドクルーザー','レクサスNX','BMW・ベンツ等'],times:['レクサス','ベンツ'],orix:['レクサス','アルファードExec'],toyota:['レクサス各種'],nippon:['レクサス','大型SUV'],orixr:['レクサス'],budget:['—']}
 };
 const ICONS={
   basic:'<svg class="op-ico" viewBox="0 0 60 36" fill="none" stroke="var(--ink-faint)" stroke-width="2.4"><path d="M6 26h48M10 26l5-12c1-2 3-3 5-3h20c2 0 4 1 5 3l5 12M18 26v3M42 26v3M22 11l1 9M40 11l-1 9"/><circle cx="18" cy="27" r="3.5" fill="var(--panel)"/><circle cx="42" cy="27" r="3.5" fill="var(--panel)"/></svg>',
   middle:'<svg class="op-ico" viewBox="0 0 60 36" fill="none" stroke="var(--ink-faint)" stroke-width="2.4"><path d="M5 27h50M9 27l3-13c1-2 3-3 5-3h26c2 0 4 1 5 3l3 13M17 27v3M43 27v3M21 11v10M40 11v10"/><circle cx="17" cy="28" r="4" fill="var(--panel)"/><circle cx="43" cy="28" r="4" fill="var(--panel)"/></svg>'
 };
-const DEST=[
-  {n:'お台場・豊洲',km:32,drv:1.0,toll:1000,dir:'near'},{n:'川崎',km:40,drv:1.2,toll:1200,dir:'near'},
-  {n:'横浜みなとみらい',km:60,drv:1.8,toll:1600,dir:'south'},{n:'鎌倉・江ノ島',km:110,drv:3.0,toll:2200,dir:'south'},
-  {n:'海ほたる/木更津',km:140,drv:2.8,toll:2400,dir:'south'},{n:'秩父',km:170,drv:4.0,toll:2600,dir:'north'},
-  {n:'箱根',km:180,drv:4.2,toll:3000,dir:'west'},{n:'伊豆(熱海)',km:200,drv:4.4,toll:3400,dir:'west'},
-  {n:'河口湖・富士',km:220,drv:4.6,toll:3600,dir:'west'},{n:'日光',km:280,drv:5.6,toll:4800,dir:'north'},
-  {n:'房総(鴨川)',km:300,drv:6.0,toll:3000,dir:'south'},{n:'軽井沢',km:320,drv:6.2,toll:5800,dir:'west'},{n:'那須',km:380,drv:7.0,toll:6200,dir:'north'},
-];
-const DIRLBL={near:'近',west:'西',south:'南',north:'北'};
+function icon(cls){return ICONS[cls]||ICONS.middle;}
 
-let DB=loadDB(); let cls=lsGet('dj_cls')||'middle'; let rvCls='basic'; let dirF='all'; let useHwy=true;
-function loadDB(){const s=lsGet('dj_db');if(s){try{const o=JSON.parse(s);if(o.carshare&&o.carshare[0].url)return o;}catch(e){}}return structuredClone(DEFAULTS);}
+let DB=loadDB(); let cls=lsGet('dj_cls')||'middle'; let useHwy=true; let routes=loadRoutes();
+let verified=lsGet('dj_verified')||'2026-06';
+function loadDB(){const s=lsGet('dj_db');if(s){try{const o=JSON.parse(s);if(o.carshare&&o.carshare[0].classes.luxury)return o;}catch(e){}}return structuredClone(DEFAULTS);}
 function saveDB(){lsSet('dj_db',JSON.stringify(DB));}
 
 const $=id=>document.getElementById(id);
@@ -389,7 +392,7 @@ function csTime(c,hours,night){
 }
 function csDist(op,c,km,hours){
   if(op.dist==='mitsui6h')return{fee:hours<=6?0:km*c.km,note:hours<=6?'6時間内→0円':Math.round(km)+'km×¥'+c.km};
-  if(op.dist==='times20'){const ch=Math.max(0,km-(op.free||20));return{fee:ch*c.km,note:'20km無料+'+Math.round(ch)+'km×¥'+c.km};}
+  if(op.dist==='times20'){const ch=Math.max(0,km-(op.free||20));return{fee:ch*c.km,note:(op.free||20)+'km無料+'+Math.round(ch)+'km×¥'+c.km};}
   return{fee:km*c.km,note:Math.round(km)+'km×¥'+c.km};
 }
 function rcCost(c,hours,km,kmpl,gas,cdwPer,cdwOn){
@@ -401,11 +404,11 @@ function rcCost(c,hours,km,kmpl,gas,cdwPer,cdwOn){
 }
 function computeAll(km,hours,night,toll,classKey,kmpl,gas,cdwPer,cdwOn){
   const rows=[];
-  DB.carshare.forEach(op=>{const c=op.classes[classKey];const tm=csTime(c,hours,night),d=csDist(op,c,km,hours);
+  DB.carshare.forEach(op=>{const c=op.classes[classKey];if(!c)return;const tm=csTime(c,hours,night),d=csDist(op,c,km,hours);
     rows.push({cat:'carshare',id:op.id,name:op.name,base:tm.amt+d.fee,
       lines:[[tm.label,yen(tm.amt)],['距離料金',d.fee===0?'0円':yen(d.fee),d.fee===0],['ガソリン','込み',true],['高速ほか',yen(toll)]],
       meta:'距離：'+d.note+'・保険込み'});});
-  DB.rentcar.forEach(op=>{const c=op.classes[classKey];const r=rcCost(c,hours,km,kmpl,gas,cdwPer,cdwOn);
+  DB.rentcar.forEach(op=>{const c=op.classes[classKey];if(!c)return;const r=rcCost(c,hours,km,kmpl,gas,cdwPer,cdwOn);
     rows.push({cat:'rentcar',id:op.id,name:op.name,base:r.base,
       lines:[[r.label+' 基本',yen(r.block)],['免責補償',r.cdw===0?'なし':yen(r.cdw),r.cdw===0],['ガソリン(満タン)',yen(r.fuel)],['高速ほか',yen(toll)]],
       meta:'距離無制限・満タン返し'});});
@@ -436,7 +439,7 @@ function calc(){
   if(win.cat==='carshare')vsub=t.hours<=6?('6時間以内に収まるのでカーシェアが有利。2番手まで約'+yen(gap)+'差。'+(win.id==='mitsui'?'三井は6時間内なら距離料金0円が効いています。':'')):('この距離・時間ではカーシェアが最安。2番手まで約'+yen(gap)+'差。返却が予定を超えると距離料金が跳ねる点に注意。');
   else vsub='距離が伸びてカーシェアの距離料金が重い領域。レンタカーが最安で燃料込みでも約'+yen(gap)+'差。要予約・満タン返し。';
   res.innerHTML=`
-    <div class="winner"><div class="vlab">最安</div>
+    <div class="winner"><div class="vlab">最安 · ${CLABEL[cls]}</div>
       <div class="vmain">${win.name} · <span class="px">${yen(win.grand)}</span>${t.ppl>1?` <span style="font-size:13px;color:var(--teal)">/ 1人 ${yen(win.per)}</span>`:''}</div>
       <div class="vsub">${vsub}</div></div>
     <div class="sec-h">カーシェア <span>最安 ${yen(cheapCS)}</span></div>
@@ -447,9 +450,9 @@ function calc(){
   bindCards();
 }
 function opCard(r,i,best,ppl){
-  const models=(MODELS[cls][r.id]||[]).map(m=>`<span class="cc">${m}</span>`).join('');
+  const models=((MODELS[cls]||{})[r.id]||[]).map(m=>`<span class="cc">${m}</span>`).join('');
   return `<div class="op ${best?'best':''}"><div class="op-top">
-    <div class="op-rank">${i+1}</div>${ICONS[cls]}
+    <div class="op-rank">${i+1}</div>${icon(cls)}
     <div class="op-name"><div class="nm">${r.name}${best?'<span class="tag">最安</span>':''}</div><div class="dt">${r.lines[0][0]}</div></div>
     <div class="op-price"><div class="pp"><span class="y">¥</span>${Math.round(r.grand).toLocaleString('ja-JP')}</div>${ppl>1?`<div class="per">1人 ${yen(r.per)}</div>`:''}</div>
     <div class="op-arr">▾</div></div>
@@ -460,48 +463,63 @@ function opCard(r,i,best,ppl){
 function bindCards(){document.querySelectorAll('.op-top').forEach(el=>el.onclick=()=>el.parentElement.classList.toggle('open'));}
 function warnings(t){
   let w='';
-  if(t.hours>6){const m=DB.carshare.find(o=>o.id==='mitsui').classes[cls].km;
-    w+='<div class="note"><b>距離料金トラップ：</b>三井系は予約か利用が6時間を1分でも超えた瞬間、全'+Math.round(t.km)+'kmが課金（@¥'+m+'/km＝'+yen(t.km*m)+'）。タイムズは20km超分のみなので超過に強い。</div>';}
-  if(t.night)w+='<div class="note tip"><b>夜間パック：</b>各社のナイト枠を候補に自動比較中。</div>';
+  if(t.hours>6){const m=(DB.carshare.find(o=>o.id==='mitsui').classes[cls]||{}).km||0;
+    w+='<div class="note"><b>距離料金トラップ：</b>三井系は予約か利用が6時間を1分でも超えた瞬間、全'+Math.round(t.km)+'kmが課金'+(m?'（@¥'+m+'/km＝'+yen(t.km*m)+'）':'')+'。タイムズは20km超分のみなので超過に強い。長時間ならレンタカーとも比較を。</div>';}
+  if(t.night)w+='<div class="note tip"><b>夜間パック：</b>各社のナイト枠を候補に自動比較中（三井のプレミアム/高級は夜間パック無し）。</div>';
   return w;
-}
-
-/* reverse */
-function rvCalc(){
-  const time=num('rvTime'),budget=num('rvBudget'),ppl=Math.max(1,Math.round(num('rvPpl'))||1),stay=num('rvStay');
-  let list=DEST.filter(d=>dirF==='all'||d.dir===dirF);
-  const rows=list.map(d=>{
-    const hours=d.drv+stay;
-    const all=computeAll(d.km,hours,false,d.toll,rvCls,num('kmpl'),num('gas'),num('cdw'),$('cdwOn').checked);
-    const best=all.sort((a,b)=>a.grand-b.grand)[0];
-    return{...d,hours,best:best.name,grand:best.grand,per:best.grand/ppl,ok:hours<=time&&best.grand/ppl<=budget};
-  });
-  const okRows=rows.filter(r=>r.ok).sort((a,b)=>a.per-b.per);
-  const noRows=rows.filter(r=>!r.ok).sort((a,b)=>a.per-b.per);
-  const maxPer=Math.max(budget,...okRows.map(r=>r.per));
-  const html=r=>`<div class="rvrow ${r.ok?'':'no'}"><div class="rn"><div class="t">${r.n}<span class="dir">${DIRLBL[r.dir]}</span></div>
-    <div class="d">往復${r.km}km ・ ${r.hours.toFixed(1)}h ・ 最安 ${r.best}</div>
-    ${r.ok?`<div class="rvbar"><i style="width:${Math.min(100,r.per/maxPer*100)}%"></i></div>`:''}</div>
-    <div class="rp"><div class="pp">${yen(r.per)}</div><div class="pv">/人${r.hours>time?' ・時間超':(r.per>budget?' ・予算超':'')}</div></div></div>`;
-  $('rvResult').innerHTML=`
-    <div class="winner" style="margin-bottom:12px"><div class="vlab">${time}h以内 / 予算¥${budget.toLocaleString('ja-JP')}・人${dirF!=='all'?' / '+DIRLBL[dirF]+'方面':''}</div>
-      <div class="vmain" style="font-size:18px">${okRows.length}ヶ所が条件内</div>
-      <div class="vsub">${okRows.length?'安い順に表示。バーは予算に対する余裕。':'条件を満たす行き先なし。時間か予算を上げるか方面を変えてみて。'}</div></div>
-    <div class="rv">${okRows.map(html).join('')}</div>
-    ${noRows.length?`<div class="sec-h">条件外（参考）</div><div class="rv">${noRows.map(html).join('')}</div>`:''}`;
 }
 
 /* cars tab */
 function renderCars(){
   const all=[...DB.carshare.map(o=>({...o,cat:'カーシェア'})),...DB.rentcar.map(o=>({...o,cat:'レンタカー'}))];
   $('carsResult').innerHTML=all.map(op=>{
-    const b=(MODELS.basic[op.id]||[]).map(m=>`<span class="cc">${m}</span>`).join('');
-    const m=(MODELS.middle[op.id]||[]).map(x=>`<span class="cc">${x}</span>`).join('');
+    const cols=CLASSES.map(cl=>{const list=((MODELS[cl]||{})[op.id]||[]).map(m=>`<span class="cc">${m}</span>`).join('');
+      return `<div class="col"><div class="lbl">${CLABEL[cl]}</div><div class="list">${list||'<span class="cc">—</span>'}</div></div>`;}).join('');
     return `<div class="carblk"><div class="ch"><div class="cn">${op.name}<span style="font-size:9px;color:var(--ink-faint);font-weight:500">${op.cat}</span></div>
       <a href="${op.url}" target="_blank" rel="noopener">公式車種ページ ↗</a></div>
-      <div class="row"><div class="col"><div class="lbl">ベーシック / コンパクト</div><div class="list">${b||'<span class="cc">—</span>'}</div></div>
-      <div class="col"><div class="lbl">ミドル / SUV・中型</div><div class="list">${m||'<span class="cc">—</span>'}</div></div></div></div>`;
+      <div class="crow">${cols}</div></div>`;
   }).join('');
+}
+
+/* ===== CSV ===== */
+const CSV_HEAD=['type','op_id','operator','class','dist_model','free_km','unit_min','time_rate','dist_rate','p6','p12','p24','night','r6','r12','r24','rday'];
+function dbToCsv(){
+  const rows=[CSV_HEAD.join(',')];
+  DB.carshare.forEach(op=>CLASSES.forEach(cl=>{const c=op.classes[cl];if(!c)return;
+    rows.push(['carshare',op.id,op.name,cl,op.dist,op.free||0,c.unit,c.per,c.km,c.p6,c.p12,c.p24,c.pn,'','','',''].join(','));}));
+  DB.rentcar.forEach(op=>CLASSES.forEach(cl=>{const c=op.classes[cl];if(!c)return;
+    rows.push(['rentcar',op.id,op.name,cl,'','','','','','','','','',c.r6,c.r12,c.r24,c.rday].join(','));}));
+  return rows.join('\n');
+}
+function downloadCsv(){
+  const blob=new Blob(['\ufeff'+dbToCsv()],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='drive-judge-rates_'+verified+'.csv';
+  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+}
+function csvToDb(text){
+  const lines=text.replace(/^\ufeff/,'').replace(/\r/g,'').split('\n').filter(l=>l.trim());
+  const head=lines[0].split(',').map(s=>s.trim());
+  const ix={};CSV_HEAD.forEach(k=>ix[k]=head.indexOf(k));
+  if(ix.type<0||ix.op_id<0||ix.class<0)throw new Error('ヘッダーが不正');
+  const ndb={carshare:[],rentcar:[]};
+  const get=(f,k)=>k>=0?(f[k]||'').trim():'';
+  const n=(f,k)=>{const v=parseFloat(get(f,k));return isNaN(v)?0:v;};
+  for(let i=1;i<lines.length;i++){
+    const f=lines[i].split(',');const type=get(f,ix.type);const id=get(f,ix.op_id);const cl=get(f,ix.class);
+    if(!id||!cl||CLASSES.indexOf(cl)<0)continue;
+    if(type==='carshare'){
+      let op=ndb.carshare.find(o=>o.id===id);
+      if(!op){op={id,name:get(f,ix.operator),dist:get(f,ix.dist_model)||'all',free:n(f,ix.free_km),url:'',classes:{}};
+        const d=DEFAULTS.carshare.find(o=>o.id===id);if(d)op.url=d.url;ndb.carshare.push(op);}
+      op.classes[cl]={p6:n(f,ix.p6),p12:n(f,ix.p12),p24:n(f,ix.p24),pn:n(f,ix.night),unit:n(f,ix.unit_min)||10,per:n(f,ix.time_rate),km:n(f,ix.dist_rate)};
+    }else if(type==='rentcar'){
+      let op=ndb.rentcar.find(o=>o.id===id);
+      if(!op){op={id,name:get(f,ix.operator),url:'',classes:{}};
+        const d=DEFAULTS.rentcar.find(o=>o.id===id);if(d)op.url=d.url;ndb.rentcar.push(op);}
+      op.classes[cl]={r6:n(f,ix.r6),r12:n(f,ix.r12),r24:n(f,ix.r24),rday:n(f,ix.rday)};
+    }
+  }
+  return ndb;
 }
 
 /* ===== Google Maps ===== */
@@ -578,43 +596,104 @@ function activateMaps(key){
   document.head.appendChild(s);
 }
 
+/* ===== saved routes ===== */
+function loadRoutes(){const s=lsGet('dj_routes');if(s){try{return JSON.parse(s);}catch(e){}}return[];}
+function saveRoutes(){lsSet('dj_routes',JSON.stringify(routes));}
+function clearStops(){stops.forEach(s=>s.wrap.remove());stops=[];}
+function captureRoute(){
+  if(!mapsReady||!placeOrigin){alert('地図を有効化し、出発地と目的地を選んでから保存してください');return;}
+  const filled=stops.filter(s=>s.place);
+  if(filled.length<1){alert('目的地を1つ以上選んでください');return;}
+  const def=originName+'→'+(filled[filled.length-1].name||'目的地');
+  const name=prompt('ルート名を入力',def);
+  if(!name)return;
+  const o=placeOrigin.geometry.location;
+  routes.unshift({id:Date.now(),name,
+    origin:{name:originName,lat:o.lat(),lng:o.lng()},
+    stops:filled.map(s=>({name:s.name||'地点',lat:s.place.geometry.location.lat(),lng:s.place.geometry.location.lng()})),
+    stay:num('stay'),ppl:Math.max(1,Math.round(num('ppl'))||1),cls,night:$('night').checked});
+  saveRoutes();renderRoutes();
+  $('saveRouteBtn').textContent='✓ 保存しました';setTimeout(()=>{$('saveRouteBtn').textContent='★ このルートを保存';},1600);
+}
+function renderRoutes(){
+  if(!routes.length){$('routesResult').innerHTML='<div class="card" style="text-align:center;color:var(--ink-faint);font-size:12.5px;padding:24px 16px">まだ保存ルートがありません。<br>比較タブでルートを組んで「★ 保存」してください</div>';return;}
+  $('routesResult').innerHTML=routes.map(r=>{
+    const chain=[r.origin.name,...r.stops.map(s=>s.name),r.origin.name].join(' → ');
+    const meta=r.stops.length+'地点・'+(CLABEL[r.cls]||r.cls)+(r.night?'・夜間':'');
+    return `<div class="rt"><div class="rh"><div class="nm">${r.name}</div><div class="meta">${meta}</div></div>
+      <div class="chain">${chain}</div>
+      <div class="acts"><button class="go" onclick="applyRoute(${r.id})">呼び出して再計算</button>
+      <button onclick="openRouteMaps(${r.id})">Maps</button>
+      <button class="del" onclick="deleteRoute(${r.id})">削除</button></div></div>`;
+  }).join('');
+}
+function deleteRoute(id){if(!confirm('このルートを削除しますか？'))return;routes=routes.filter(r=>r.id!==id);saveRoutes();renderRoutes();}
+function openRouteMaps(id){
+  const r=routes.find(x=>x.id===id);if(!r)return;
+  const wp=r.stops.map(s=>s.lat+','+s.lng).join('|');
+  const url='https://www.google.com/maps/dir/?api=1&origin='+r.origin.lat+','+r.origin.lng+'&destination='+r.origin.lat+','+r.origin.lng+(wp?'&waypoints='+encodeURIComponent(wp):'')+'&travelmode=driving';
+  window.open(url,'_blank');
+}
+function applyRoute(id){
+  const r=routes.find(x=>x.id===id);if(!r)return;
+  document.querySelector('.tabs button[data-tab="compare"]').click();
+  if(!mapsReady){alert('「呼び出して再計算」はGoogle Mapsキーの有効化が必要です。今は「Maps」ボタンでナビを開けます');return;}
+  if($('manualInputs').style.display!=='none')$('manualToggle').click();
+  $('origin').value=r.origin.name;
+  placeOrigin={geometry:{location:new google.maps.LatLng(r.origin.lat,r.origin.lng)}};originName=r.origin.name;
+  clearStops();
+  r.stops.forEach(s=>{makeStopRow();const obj=stops[stops.length-1];obj.input.value=s.name;obj.name=s.name;obj.place={geometry:{location:new google.maps.LatLng(s.lat,s.lng)}};});
+  $('stay').value=r.stay;$('ppl').value=r.ppl;$('night').checked=r.night;
+  if(CLASSES.indexOf(r.cls)>=0){cls=r.cls;$('classSeg').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.c===cls));lsSet('dj_cls',cls);renderSettings();}
+  computeRoute();
+}
+
 function renderSettings(){
-  $('clsLabel').textContent=cls==='middle'?'ミドル':'ベーシック';
+  $('clsLabel').value=CLABEL[cls];
   const csF=[['p6','6h'],['p12','12h'],['p24','24h'],['pn','夜間'],['per','時間'],['km','¥/km']];
-  $('csSettings').innerHTML='<div class="glob" style="color:var(--amber-deep)">カーシェア</div>'+DB.carshare.map(op=>{const c=op.classes[cls];
-    return `<div class="opset"><div class="h">${op.name}</div><div class="g">${csF.map(f=>`<div class="f"><label>${f[1]}</label><div class="inputbox"><input type="number" data-cat="carshare" data-id="${op.id}" data-k="${f[0]}" value="${c[f[0]]}"></div></div>`).join('')}</div></div>`;}).join('');
+  $('csSettings').innerHTML='<div class="glob" style="color:var(--amber-deep)">カーシェア（'+CLABEL[cls]+'）</div>'+DB.carshare.map(op=>{const c=op.classes[cls]||{};
+    return `<div class="opset"><div class="h">${op.name}</div><div class="g">${csF.map(f=>`<div class="f"><label>${f[1]}</label><div class="inputbox"><input type="number" data-cat="carshare" data-id="${op.id}" data-k="${f[0]}" value="${c[f[0]]??0}"></div></div>`).join('')}</div></div>`;}).join('');
   const rcF=[['r6','6h'],['r12','12h'],['r24','24h'],['rday','+1日']];
-  $('rcSettings').innerHTML='<div class="glob" style="color:var(--blue)">レンタカー（基本料金）</div>'+DB.rentcar.map(op=>{const c=op.classes[cls];
-    return `<div class="opset"><div class="h">${op.name}</div><div class="g">${rcF.map(f=>`<div class="f"><label>${f[1]}</label><div class="inputbox"><input type="number" data-cat="rentcar" data-id="${op.id}" data-k="${f[0]}" value="${c[f[0]]}"></div></div>`).join('')}</div></div>`;}).join('');
-  document.querySelectorAll('#csSettings input,#rcSettings input').forEach(inp=>inp.addEventListener('input',()=>{DB[inp.dataset.cat].find(o=>o.id===inp.dataset.id).classes[cls][inp.dataset.k]=parseFloat(inp.value)||0;saveDB();calc();}));
+  $('rcSettings').innerHTML='<div class="glob" style="color:var(--blue)">レンタカー（'+CLABEL[cls]+'・基本料金）</div>'+DB.rentcar.map(op=>{const c=op.classes[cls]||{};
+    return `<div class="opset"><div class="h">${op.name}</div><div class="g">${rcF.map(f=>`<div class="f"><label>${f[1]}</label><div class="inputbox"><input type="number" data-cat="rentcar" data-id="${op.id}" data-k="${f[0]}" value="${c[f[0]]??0}"></div></div>`).join('')}</div></div>`;}).join('');
+  document.querySelectorAll('#csSettings input,#rcSettings input').forEach(inp=>inp.addEventListener('input',()=>{const op=DB[inp.dataset.cat].find(o=>o.id===inp.dataset.id);if(!op.classes[cls])op.classes[cls]={};op.classes[cls][inp.dataset.k]=parseFloat(inp.value)||0;saveDB();calc();}));
 }
 
 $('classSeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('classSeg').querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');cls=b.dataset.c;lsSet('dj_cls',cls);renderSettings();calc();});
-$('rvClassSeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('rvClassSeg').querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');rvCls=b.dataset.c;rvCalc();});
-$('dirFilter').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('dirFilter').querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');dirF=b.dataset.d;rvCalc();});
 $('hwySeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('hwySeg').querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');useHwy=b.dataset.hwy==='1';computeRoute();});
 ['stay','ppl','toll','distM','driveM','kmpl','gas','cdw','tollkm'].forEach(id=>$(id).addEventListener('input',calc));
 ['night','cdwOn'].forEach(id=>$(id).addEventListener('change',()=>{calc();}));
-['rvTime','rvBudget','rvPpl','rvStay'].forEach(id=>$(id).addEventListener('input',rvCalc));
 $('addStop').onclick=addStop;
 $('optBtn').onclick=()=>computeRoute(true);
+$('saveRouteBtn').onclick=captureRoute;
 $('accH').onclick=()=>$('acc').classList.toggle('open');
 $('keyBtn').onclick=()=>activateMaps($('apiKey').value.trim());
-$('resetBtn').onclick=()=>{DB=structuredClone(DEFAULTS);saveDB();renderSettings();calc();};
+$('resetBtn').onclick=()=>{if(!confirm('既定値に戻しますか？（編集内容は消えます）'))return;DB=structuredClone(DEFAULTS);saveDB();renderSettings();calc();};
 $('manualToggle').onclick=()=>{const m=$('manualInputs'),g=$('mapsInputs');const toM=m.style.display==='none';m.style.display=toM?'block':'none';g.style.display=toM?'none':'block';$('manualToggle').textContent=toM?'地図に戻す':'手入力';calc();};
+$('csvExport').onclick=downloadCsv;
+$('csvFile').onchange=e=>{const file=e.target.files[0];if(!file)return;const rd=new FileReader();
+  rd.onload=()=>{try{const nd=csvToDb(rd.result);if(nd.carshare.length&&nd.rentcar.length){DB=nd;saveDB();renderSettings();calc();renderCars();alert('CSVを取り込みました（'+nd.carshare.length+'カーシェア社・'+nd.rentcar.length+'レンタカー社）');}else alert('CSVの形式が不正です。carshare と rentcar 両方の行が必要です。');}catch(err){alert('取り込み失敗：'+err.message);}finally{e.target.value='';}};
+  rd.readAsText(file);};
+$('verified').addEventListener('input',()=>{verified=$('verified').value.trim()||'—';lsSet('dj_verified',verified);$('verFoot').textContent=verified;});
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
-  const t=b.dataset.tab;$('tab-compare').style.display=t==='compare'?'block':'none';$('tab-reverse').style.display=t==='reverse'?'block':'none';$('tab-cars').style.display=t==='cars'?'block':'none';
-  if(t==='reverse')rvCalc();if(t==='cars')renderCars();
+  const t=b.dataset.tab;$('tab-compare').style.display=t==='compare'?'block':'none';$('tab-cars').style.display=t==='cars'?'block':'none';$('tab-routes').style.display=t==='routes'?'block':'none';
+  if(t==='cars')renderCars();if(t==='routes')renderRoutes();
 });
-$('aboutLnk').onclick=()=>alert('料金モデル：各社公式の料金・車種ページ（三井／タイムズ／オリックス／トヨタ・ニッポン・オリックス・格安系）をもとにした2025末〜2026改定後の標準目安。各社にAPIは無く自動取得不可、⚙︎で上書き保存可。\n\n距離モデル：三井=6時間内0円/超過は全km、タイムズ=20km超分のみ、オリックス=全km。\n\n高速代：Googleは日本の通行料金を返さないため距離からの概算。正確な額は「NEXCOで調べる」リンクから。\n\nGoogle Maps料金：2025年3月以降SKUごとに月間無料枠（Essentialsは各1万回/月）。個人の手動利用は通常¥0。キーにはリファラー制限を。');
+$('aboutLnk').onclick=()=>alert('料金モデル：各社公式（三井 2026/4、タイムズ 2025/12、オリックス 2026/3 改定後）の標準会員・標準シーズン目安。プレミアム/高級は推定を含むため要確認。各社にAPIは無く自動取得不可、⚙︎またはCSVで上書き保存できます。\n\n距離モデル：三井=6時間内0円/超過は全km、タイムズ=20km超分のみ、オリックス=全km。\n\n高速代：Googleは日本の通行料金を返さないため距離からの概算。正確な額は「NEXCOで調べる」リンクから。\n\nGoogle Maps料金：2025年3月以降SKUごとに月間無料枠。個人の手動利用は通常¥0。キーにはリファラー制限を。');
 
 $('classSeg').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.dataset.c===cls));
+$('verified').value=verified;$('verFoot').textContent=verified;
 renderSettings();
+renderRoutes();
 const savedKey=lsGet('dj_key');
 if(savedKey){$('apiKey').value=savedKey;activateMaps(savedKey);}
 calc();
-if('serviceWorker' in navigator && location.protocol==='https:'){window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));}
+if('serviceWorker' in navigator && location.protocol==='https:'){
+  let reloaded=false;
+  navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload();});
+  window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(reg=>reg.update()).catch(()=>{}));
+}
 </script>
 </body>
 </html>
