@@ -231,7 +231,7 @@
 <div class="wrap">
 
   <header>
-    <div class="kicker">Drive Cost Judge · v7</div>
+    <div class="kicker">Drive Cost Judge · v8</div>
     <h1>カーシェア<span class="vs">vs</span>レンタカー</h1>
   </header>
 
@@ -424,7 +424,7 @@ const ICONS={
 };
 function icon(cls){return ICONS[cls]||ICONS.middle;}
 
-const APP_VERSION=7;
+const APP_VERSION=8;
 let DB=loadDB(); let cls=lsGet('dj_cls')||'middle'; let useHwy=true; let routes=loadRoutes(); let places=loadPlaces();
 let verified=lsGet('dj_verified')||'2026-06';
 let placeFilter='all', placePick=null, placeLabel='友人宅';
@@ -587,6 +587,30 @@ function csvToDb(text){
 /* ===== Google Maps ===== */
 const LIGHT_MAP=[{elementType:'geometry',stylers:[{color:'#f3ede1'}]},{elementType:'labels.text.fill',stylers:[{color:'#8a8170'}]},{elementType:'labels.text.stroke',stylers:[{color:'#fbf8f2'}]},{featureType:'poi',stylers:[{visibility:'off'}]},{featureType:'transit',stylers:[{visibility:'off'}]},{featureType:'road',elementType:'geometry',stylers:[{color:'#ffffff'}]},{featureType:'road.highway',elementType:'geometry',stylers:[{color:'#f0d9bf'}]},{featureType:'road',elementType:'labels.icon',stylers:[{visibility:'off'}]},{featureType:'water',elementType:'geometry',stylers:[{color:'#cfe3e0'}]},{featureType:'landscape',elementType:'geometry',stylers:[{color:'#f6f0e6'}]},{featureType:'administrative',elementType:'geometry',stylers:[{color:'#e4d9c6'}]}];
 let mapsReady=false,map,dirSvc,dirRenderer,acOrigin,placeOrigin=null,originName='出発地',stops=[];
+let placesSvc=null;
+function parseCoords(str){
+  if(!str)return null;str=str.trim();
+  let m=str.match(/^(-?\d{1,3}(?:\.\d+)?)\s*[, ]\s*(-?\d{1,3}(?:\.\d+)?)$/);
+  if(m){const la=parseFloat(m[1]),ln=parseFloat(m[2]);if(Math.abs(la)<=90&&Math.abs(ln)<=180)return{lat:la,lng:ln};}
+  const dms=/(\d{1,3})[°\s]+(\d{1,2})[\u2032'\s]+([\d.]+)[\u2033"\s]*([NSEWnsew])/g;
+  const found=[];let mm;
+  while((mm=dms.exec(str))!==null){let v=parseInt(mm[1],10)+parseInt(mm[2],10)/60+parseFloat(mm[3])/3600;const d=mm[4].toUpperCase();if(d==='S'||d==='W')v=-v;found.push({v,d});}
+  if(found.length===2){let lat,lng;found.forEach(f=>{if(f.d==='N'||f.d==='S')lat=f.v;else lng=f.v;});
+    if(lat===undefined||lng===undefined){lat=found[0].v;lng=found[1].v;}
+    if(Math.abs(lat)<=90&&Math.abs(lng)<=180)return{lat,lng};}
+  return null;
+}
+function resolveText(value,cb){
+  value=(value||'').trim();if(!value){cb(null);return;}
+  const c=parseCoords(value);
+  if(c){cb({name:'座標('+c.lat.toFixed(4)+','+c.lng.toFixed(4)+')',lat:c.lat,lng:c.lng});return;}
+  if(!mapsReady){cb(null);return;}
+  if(!placesSvc)placesSvc=new google.maps.places.PlacesService(map);
+  placesSvc.findPlaceFromQuery({query:value,fields:['geometry','name']},(r,st)=>{
+    if(st===google.maps.places.PlacesServiceStatus.OK&&r&&r[0]&&r[0].geometry)cb({name:r[0].name||value,lat:r[0].geometry.location.lat(),lng:r[0].geometry.location.lng()});
+    else cb(null);
+  });
+}
 window.__initMaps=function(){
   mapsReady=true;
   try{
@@ -596,6 +620,9 @@ window.__initMaps=function(){
     const opt={fields:['geometry','name'],componentRestrictions:{country:'jp'}};
     acOrigin=new google.maps.places.Autocomplete($('origin'),opt);
     acOrigin.addListener('place_changed',()=>{const p=acOrigin.getPlace();placeOrigin=(p&&p.geometry)?p:null;originName=(p&&p.name)||$('origin').value||'出発地';computeRoute();});
+    $('origin').addEventListener('blur',()=>{setTimeout(()=>{if(placeOrigin)return;const v=$('origin').value.trim();if(!v)return;
+      resolveText(v,res=>{if(res){placeOrigin={geometry:{location:new google.maps.LatLng(res.lat,res.lng)}};originName=res.name;computeRoute();}
+        else{$('routeStatus').className='status err';$('routeStatus').textContent='出発地を認識できません（候補から選ぶか「緯度, 経度」で入力）';}});},300);});
     const acp=new google.maps.places.Autocomplete($('placeAddr'),opt);
     acp.addListener('place_changed',()=>{const p=acp.getPlace();if(p&&p.geometry){placePick={name:p.name||$('placeAddr').value,lat:p.geometry.location.lat(),lng:p.geometry.location.lng()};if(!$('placeName').value)$('placeName').value=placePick.name;$('placeStatus').className='status ok';$('placeStatus').textContent='✓ 取得：'+placePick.name;}});
     addStop();
@@ -612,6 +639,9 @@ function makeStopRow(){
   const input=wrap.querySelector('input');
   const obj={wrap,input,place:null,name:'',ac:null};
   if(mapsReady){obj.ac=new google.maps.places.Autocomplete(input,{fields:['geometry','name'],componentRestrictions:{country:'jp'}});obj.ac.addListener('place_changed',()=>{const p=obj.ac.getPlace();obj.place=(p&&p.geometry)?p:null;obj.name=(p&&p.name)||input.value;computeRoute();});}
+  input.addEventListener('blur',()=>{setTimeout(()=>{if(obj.place)return;const v=input.value.trim();if(!v)return;
+    resolveText(v,res=>{if(res){obj.place={geometry:{location:new google.maps.LatLng(res.lat,res.lng)}};obj.name=res.name;computeRoute();}
+      else{$('routeStatus').className='status err';$('routeStatus').textContent='「'+v+'」を認識できません（候補から選ぶか「緯度, 経度」で入力）';}});},300);});
   wrap.querySelector('.rm').onclick=()=>{stops=stops.filter(s=>s!==obj);wrap.remove();renumber();computeRoute();};
   wrap.querySelector('.up').onclick=()=>moveStop(obj,-1);
   wrap.querySelector('.dn').onclick=()=>moveStop(obj,1);
@@ -640,7 +670,8 @@ function computeRoute(opt){
       route.km=m/1000;route.driveH=sec/3600;
       const names=[originName,...stops.filter(s=>s.place).map(s=>s.name||'地点'),originName];
       const legNotes=r.routes[0].legs.map((leg,i)=>'<b>'+names[i]+'→'+names[i+1]+'</b> '+(leg.distance.value/1000).toFixed(1)+'km');
-      $('routeStatus').className='status ok';$('routeStatus').textContent='✓ 合計 '+route.km.toFixed(1)+'km / 運転'+route.driveH.toFixed(1)+'h（'+(useHwy?'高速あり':'下道')+'・出発地に戻る）';
+      const ghost=stops.filter(s=>!s.place&&s.input.value.trim()).length;
+      $('routeStatus').className=ghost?'status err':'status ok';$('routeStatus').textContent='✓ 合計 '+route.km.toFixed(1)+'km / 運転'+route.driveH.toFixed(1)+'h（'+(useHwy?'高速あり':'下道')+'・出発地に戻る）'+(ghost?'　※未認識の地点'+ghost+'件を除外（青いボックスをタップで再入力）':'');
       $('legs').innerHTML=legNotes.join('　/　');
       const est=useHwy?Math.round(route.km*num('tollkm')/50)*50:0;
       $('toll').value=est;

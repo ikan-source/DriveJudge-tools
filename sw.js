@@ -1,5 +1,5 @@
 /* Drive Judge — service worker (network-first for app files, auto-update) */
-const CACHE = 'drive-judge-v8';
+const CACHE = 'drive-judge-v9';
 const SHELL = ['./', './index.html', './manifest.json', './icon.svg'];
 
 self.addEventListener('install', e => {
