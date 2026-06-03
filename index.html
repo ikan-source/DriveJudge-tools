@@ -196,6 +196,34 @@
   .pac-item:hover,.pac-item-selected{background:var(--bg2)!important}
   .pac-item-query{color:var(--ink)!important;font-size:13px!important}
   .pac-matched{color:var(--amber-deep)!important}
+  .winner .vtip{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line2);font-size:11.5px;color:var(--amber-deep);line-height:1.55;font-weight:500}
+
+  .iconbtn{flex:0 0 auto;width:32px;height:38px;border-radius:9px;border:1px solid var(--line);background:var(--panel2);color:var(--amber-deep);font-size:15px;cursor:pointer}
+  .iconbtn:active{transform:scale(.95)}
+  .pl{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:11px 13px;margin-bottom:8px;box-shadow:0 1px 8px rgba(140,110,60,.05)}
+  .pl .pn{flex:1;min-width:0}
+  .pl .pn .t{font-size:13px;font-weight:700;display:flex;align-items:center;gap:7px}
+  .pl .pn .t .lb{font-size:9px;font-weight:700;color:var(--amber-deep);background:var(--glow);border-radius:5px;padding:2px 6px}
+  .pl .pn .a{font-size:10px;color:var(--ink-faint);font-family:var(--mono);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .pl .pd{flex:0 0 auto;width:34px;height:32px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--rose);font-size:13px;cursor:pointer}
+  .chips{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 11px}
+  .chips button{padding:7px 12px;border-radius:9px;border:1px solid var(--line);background:var(--bg2);color:var(--ink-dim);font-family:var(--ui);font-size:11.5px;font-weight:500;cursor:pointer}
+  .chips button.on{background:var(--amber);color:#fff;border-color:var(--amber)}
+
+  .modal{position:fixed;inset:0;background:rgba(40,32,20,.4);backdrop-filter:blur(3px);z-index:50;display:flex;align-items:flex-end;justify-content:center;padding:0}
+  .modal-card{background:var(--bg);width:100%;max-width:600px;max-height:82vh;border-radius:18px 18px 0 0;border:1px solid var(--line);padding:18px 16px max(20px,env(safe-area-inset-bottom));overflow-y:auto;box-shadow:0 -8px 40px rgba(80,60,30,.25)}
+  .modal-h{font-family:var(--serif);font-size:15px;font-weight:700;display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}
+  .modal-h .x{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--panel);color:var(--ink-dim);font-size:16px;cursor:pointer;line-height:1}
+  .mpl{display:flex;align-items:center;gap:9px;background:var(--panel);border:1px solid var(--line);border-radius:11px;padding:10px 12px;margin-bottom:8px}
+  .mpl .mn{flex:1;min-width:0}
+  .mpl .mn .t{font-size:13px;font-weight:700}
+  .mpl .mn .lb{font-size:9px;font-weight:700;color:var(--amber-deep);background:var(--glow);border-radius:5px;padding:2px 6px;margin-left:6px}
+  .mpl .mb{flex:0 0 auto;padding:8px 11px;border-radius:8px;border:1px solid var(--line);background:var(--panel2);color:var(--ink-dim);font-size:11px;font-weight:700;cursor:pointer}
+  .mpl .mb.org{background:var(--amber);color:#fff;border-color:var(--amber)}
+
+  .updbar{display:none;align-items:center;gap:10px;background:rgba(61,119,181,.1);border:1px solid rgba(61,119,181,.3);border-radius:12px;padding:11px 13px;margin-bottom:14px;font-size:11.5px;color:var(--ink-dim);line-height:1.5}
+  .updbar b{color:var(--blue)}
+  .updbar button{flex:0 0 auto;border:none;background:var(--blue);color:#fff;border-radius:8px;padding:8px 12px;font-family:var(--ui);font-size:11.5px;font-weight:700;cursor:pointer}
   .pac-icon{display:none!important}
 </style>
 </head>
@@ -203,14 +231,16 @@
 <div class="wrap">
 
   <header>
-    <div class="kicker">Drive Cost Judge · v6</div>
+    <div class="kicker">Drive Cost Judge · v7</div>
     <h1>カーシェア<span class="vs">vs</span>レンタカー</h1>
   </header>
+
+  <div class="updbar" id="updBar"><div><b>新しいバージョンがあります。</b>アイコンから開いて自動更新されない場合は、ホーム画面のアイコンを長押し→削除→Safariで開き直して再追加すると確実です。</div><button id="updReload">更新</button></div>
 
   <div class="tabs">
     <button data-tab="compare" class="on">比較</button>
     <button data-tab="cars">車種</button>
-    <button data-tab="routes">ルート</button>
+    <button data-tab="routes">保存</button>
   </div>
 
   <!-- ===== COMPARE ===== -->
@@ -221,6 +251,7 @@
         <div class="stop"><div class="pin">●</div><div class="inputbox"><input class="txt" id="origin" placeholder="出発地（例：早稲田駅）" autocomplete="off"></div></div>
         <div id="stops"></div>
         <button class="addstop" id="addStop">＋ 立ち寄り先を追加</button>
+        <button class="addstop" id="recallPlace" style="margin-top:7px">📖 マイ地点から入れる（友人宅など）</button>
         <div class="routebtns">
           <div class="seg" id="hwySeg" style="flex:1.4">
             <button data-hwy="1" class="on">高速あり</button>
@@ -303,13 +334,34 @@
     <div id="carsResult"></div>
   </div>
 
-  <!-- ===== ROUTES ===== -->
+  <!-- ===== ROUTES / SAVED ===== -->
   <div id="tab-routes" style="display:none">
     <div class="card" style="margin-bottom:12px">
-      <div class="card-t"><div class="l"><span class="dot"></span>マイルート（保存した兜风コース）</div></div>
-      <div style="font-size:11.5px;color:var(--ink-dim);line-height:1.6">比較タブでルートを組んで「★ このルートを保存」で登録。ここから1タップで呼び出して再計算、または Google Maps でナビ起動。端末内に保存。</div>
+      <div class="card-t"><div class="l"><span class="dot"></span>マイ地点（検索で出ない私的な場所）</div></div>
+      <div style="font-size:11.5px;color:var(--ink-dim);line-height:1.55;margin-bottom:12px">友人宅・特定の駐車場など、Google検索で一発で出ない場所を登録。比較タブの「📖 マイ地点から入れる」でルートに呼び出せます。観光地や駅は検索で出るので登録不要。端末内にのみ保存。</div>
+      <div id="placeAddBox">
+        <div class="inputbox"><input class="txt" id="placeAddr" placeholder="住所・場所を検索して選択" autocomplete="off"></div>
+        <div class="row2" style="margin-top:9px">
+          <div class="inputbox"><input class="txt" id="placeName" placeholder="名前（例：○○の家）" autocomplete="off"></div>
+        </div>
+        <div class="chips" id="placeLabelSel" style="margin-top:9px"><button data-l="友人宅" class="on">友人宅</button><button data-l="駐車場">駐車場</button><button data-l="その他">その他</button></div>
+        <button class="btn amber" id="placeSave" style="width:100%;padding:11px">マイ地点に保存</button>
+        <div class="status wait" id="placeStatus" style="text-align:center"></div>
+      </div>
+      <div id="placesList" style="margin-top:13px"></div>
     </div>
+
+    <div class="card-t" style="margin:4px 2px 10px"><div class="l"><span class="dot"></span>保存ルート（兜风コース）</div></div>
     <div id="routesResult"></div>
+  </div>
+
+  <!-- recall modal -->
+  <div class="modal" id="placeModal">
+    <div class="modal-card">
+      <div class="modal-h">マイ地点から選ぶ<button class="x" id="placeModalClose">×</button></div>
+      <div class="chips" id="placeModalFilter"><button data-l="all" class="on">すべて</button><button data-l="友人宅">友人宅</button><button data-l="駐車場">駐車場</button><button data-l="その他">その他</button></div>
+      <div id="placeModalList"></div>
+    </div>
   </div>
 
   <footer>
@@ -372,8 +424,10 @@ const ICONS={
 };
 function icon(cls){return ICONS[cls]||ICONS.middle;}
 
-let DB=loadDB(); let cls=lsGet('dj_cls')||'middle'; let useHwy=true; let routes=loadRoutes();
+const APP_VERSION=7;
+let DB=loadDB(); let cls=lsGet('dj_cls')||'middle'; let useHwy=true; let routes=loadRoutes(); let places=loadPlaces();
 let verified=lsGet('dj_verified')||'2026-06';
+let placeFilter='all', placePick=null, placeLabel='友人宅';
 function loadDB(){const s=lsGet('dj_db');if(s){try{const o=JSON.parse(s);if(o.carshare&&o.carshare[0].classes.luxury)return o;}catch(e){}}return structuredClone(DEFAULTS);}
 function saveDB(){lsSet('dj_db',JSON.stringify(DB));}
 
@@ -441,7 +495,8 @@ function calc(){
   res.innerHTML=`
     <div class="winner"><div class="vlab">最安 · ${CLABEL[cls]}</div>
       <div class="vmain">${win.name} · <span class="px">${yen(win.grand)}</span>${t.ppl>1?` <span style="font-size:13px;color:var(--teal)">/ 1人 ${yen(win.per)}</span>`:''}</div>
-      <div class="vsub">${vsub}</div></div>
+      <div class="vsub">${vsub}</div>
+      <div class="vtip">💡 ${packAdvice(t.hours,win)}</div></div>
     <div class="sec-h">カーシェア <span>最安 ${yen(cheapCS)}</span></div>
     <div class="lb">${all.filter(r=>r.cat==='carshare').map((r,i)=>opCard(r,i,r.grand===cheapCS,t.ppl)).join('')}</div>
     <div class="sec-h">レンタカー <span>最安 ${yen(cheapRC)}</span></div>
@@ -467,6 +522,13 @@ function warnings(t){
     w+='<div class="note"><b>距離料金トラップ：</b>三井系は予約か利用が6時間を1分でも超えた瞬間、全'+Math.round(t.km)+'kmが課金'+(m?'（@¥'+m+'/km＝'+yen(t.km*m)+'）':'')+'。タイムズは20km超分のみなので超過に強い。長時間ならレンタカーとも比較を。</div>';}
   if(t.night)w+='<div class="note tip"><b>夜間パック：</b>各社のナイト枠を候補に自動比較中（三井のプレミアム/高級は夜間パック無し）。</div>';
   return w;
+}
+function packAdvice(hours,win){
+  const cat=win.cat==='carshare'?'カーシェア':'レンタカー';
+  if(hours<=6)return cat+'が最安。6時間パック内なので距離料金0円の三井カーシェアが基本有利。返却が6hを超えそうなら早めに延長を（超えた瞬間に全km課金）。';
+  if(hours<=12)return '6hを超えるので各社で距離料金が発生する領域。12時間パックの範囲だが、走行が伸びるほどレンタカー（距離無制限）が有利になりやすいので必ず比較を。';
+  if(hours<=24)return Math.ceil(hours)+'h は24時間パックの範囲。13hでも15hでも同じ24hパック料金になりがちなので、渋滞・延着に備えて長めに予約して損なし。ただし長距離ならカーシェアの距離料金が重く、レンタカーが安いことが多い。';
+  const d=Math.ceil(hours/24);return d+'日の長時間。長距離だとカーシェアの距離料金がかさむので、レンタカー（距離無制限）が有利な可能性大。予約は余裕を持った枠で。';
 }
 
 /* cars tab */
@@ -534,6 +596,8 @@ window.__initMaps=function(){
     const opt={fields:['geometry','name'],componentRestrictions:{country:'jp'}};
     acOrigin=new google.maps.places.Autocomplete($('origin'),opt);
     acOrigin.addListener('place_changed',()=>{const p=acOrigin.getPlace();placeOrigin=(p&&p.geometry)?p:null;originName=(p&&p.name)||$('origin').value||'出発地';computeRoute();});
+    const acp=new google.maps.places.Autocomplete($('placeAddr'),opt);
+    acp.addListener('place_changed',()=>{const p=acp.getPlace();if(p&&p.geometry){placePick={name:p.name||$('placeAddr').value,lat:p.geometry.location.lat(),lng:p.geometry.location.lng()};if(!$('placeName').value)$('placeName').value=placePick.name;$('placeStatus').className='status ok';$('placeStatus').textContent='✓ 取得：'+placePick.name;}});
     addStop();
     $('map').style.display='block';$('legs').style.display='block';
     $('routeStatus').className='status ok';$('routeStatus').textContent='✓ 地図有効。出発地と目的地を選択';
@@ -599,6 +663,62 @@ function activateMaps(key){
 /* ===== saved routes ===== */
 function loadRoutes(){const s=lsGet('dj_routes');if(s){try{return JSON.parse(s);}catch(e){}}return[];}
 function saveRoutes(){lsSet('dj_routes',JSON.stringify(routes));}
+
+/* ===== my places (private points) ===== */
+function loadPlaces(){const s=lsGet('dj_places');if(s){try{return JSON.parse(s);}catch(e){}}return[];}
+function savePlaces(){lsSet('dj_places',JSON.stringify(places));}
+function savePlaceFromForm(){
+  if(!mapsReady){alert('Google Mapsキーを有効化してから追加してください');return;}
+  if(!placePick){$('placeStatus').className='status err';$('placeStatus').textContent='先に検索して場所を選んでください';return;}
+  const name=($('placeName').value||placePick.name||'地点').trim();
+  places.unshift({id:Date.now(),name,label:placeLabel,lat:placePick.lat,lng:placePick.lng});
+  savePlaces();renderPlaces();
+  placePick=null;$('placeAddr').value='';$('placeName').value='';
+  $('placeStatus').className='status ok';$('placeStatus').textContent='✓ 保存しました';setTimeout(()=>{$('placeStatus').textContent='';},1500);
+}
+function renderPlaces(){
+  if(!places.length){$('placesList').innerHTML='<div style="font-size:11.5px;color:var(--ink-faint);text-align:center;padding:8px">まだマイ地点がありません</div>';return;}
+  $('placesList').innerHTML=places.map(p=>`<div class="pl"><div class="pn"><div class="t">${p.name}<span class="lb">${p.label}</span></div><div class="a">${p.lat.toFixed(4)}, ${p.lng.toFixed(4)}</div></div><button class="pd" onclick="deletePlace(${p.id})">🗑</button></div>`).join('');
+}
+function deletePlace(id){if(!confirm('このマイ地点を削除しますか？'))return;places=places.filter(p=>p.id!==id);savePlaces();renderPlaces();}
+function openPlaceModal(){
+  if(!places.length){alert('先に「保存」タブでマイ地点を登録してください（友人宅など）');return;}
+  if(!mapsReady){alert('地図を有効化すると、選んだ地点をルートに反映できます');return;}
+  renderPlaceModal();$('placeModal').style.display='flex';
+}
+function closePlaceModal(){$('placeModal').style.display='none';}
+function renderPlaceModal(){
+  const list=places.filter(p=>placeFilter==='all'||p.label===placeFilter);
+  $('placeModalList').innerHTML=list.length?list.map(p=>`<div class="mpl"><div class="mn"><span class="t">${p.name}</span><span class="lb">${p.label}</span></div><button class="mb org" onclick="usePlace(${p.id},'origin')">出発地</button><button class="mb" onclick="usePlace(${p.id},'stop')">経由地</button></div>`).join(''):'<div style="font-size:11.5px;color:var(--ink-faint);text-align:center;padding:14px">該当なし</div>';
+}
+function usePlace(id,target){
+  const p=places.find(x=>x.id===id);if(!p)return;
+  if(target==='origin'){$('origin').value=p.name;placeOrigin={geometry:{location:new google.maps.LatLng(p.lat,p.lng)}};originName=p.name;}
+  else{makeStopRow();const obj=stops[stops.length-1];obj.input.value=p.name;obj.name=p.name;obj.place={geometry:{location:new google.maps.LatLng(p.lat,p.lng)}};}
+  closePlaceModal();computeRoute();
+}
+
+/* ===== auto-update (version.json) ===== */
+async function checkUpdate(){
+  try{
+    const r=await fetch('version.json?_='+Date.now(),{cache:'no-store'});
+    if(!r.ok)return;
+    const remote=(await r.json()).version||0;
+    if(remote>APP_VERSION){
+      const tried=parseInt(lsGet('dj_upd')||'0',10);
+      if(tried>=remote){$('updBar').style.display='flex';return;}
+      lsSet('dj_upd',String(remote));
+      try{if('caches'in window){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)));}}catch(e){}
+      try{if(navigator.serviceWorker){const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(x=>x.unregister()));}}catch(e){}
+      location.replace(location.pathname+'?v='+remote);
+    }else{lsSet('dj_upd','0');}
+  }catch(e){}
+}
+async function forceRefresh(){
+  try{if('caches'in window){const ks=await caches.keys();await Promise.all(ks.map(k=>caches.delete(k)));}
+  if(navigator.serviceWorker){const rs=await navigator.serviceWorker.getRegistrations();await Promise.all(rs.map(x=>x.unregister()));}}catch(e){}
+  location.replace(location.pathname+'?v='+Date.now());
+}
 function clearStops(){stops.forEach(s=>s.wrap.remove());stops=[];}
 function captureRoute(){
   if(!mapsReady||!placeOrigin){alert('地図を有効化し、出発地と目的地を選んでから保存してください');return;}
@@ -666,6 +786,13 @@ $('hwySeg').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('hwySeg').que
 $('addStop').onclick=addStop;
 $('optBtn').onclick=()=>computeRoute(true);
 $('saveRouteBtn').onclick=captureRoute;
+$('placeSave').onclick=savePlaceFromForm;
+$('recallPlace').onclick=openPlaceModal;
+$('placeModalClose').onclick=closePlaceModal;
+$('placeModal').onclick=e=>{if(e.target.id==='placeModal')closePlaceModal();};
+$('placeLabelSel').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('placeLabelSel').querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');placeLabel=b.dataset.l;});
+$('placeModalFilter').querySelectorAll('button').forEach(b=>b.onclick=()=>{$('placeModalFilter').querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');placeFilter=b.dataset.l;renderPlaceModal();});
+$('updReload').onclick=forceRefresh;
 $('accH').onclick=()=>$('acc').classList.toggle('open');
 $('keyBtn').onclick=()=>activateMaps($('apiKey').value.trim());
 $('resetBtn').onclick=()=>{if(!confirm('既定値に戻しますか？（編集内容は消えます）'))return;DB=structuredClone(DEFAULTS);saveDB();renderSettings();calc();};
@@ -678,7 +805,7 @@ $('verified').addEventListener('input',()=>{verified=$('verified').value.trim()|
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('.tabs button').forEach(x=>x.classList.remove('on'));b.classList.add('on');
   const t=b.dataset.tab;$('tab-compare').style.display=t==='compare'?'block':'none';$('tab-cars').style.display=t==='cars'?'block':'none';$('tab-routes').style.display=t==='routes'?'block':'none';
-  if(t==='cars')renderCars();if(t==='routes')renderRoutes();
+  if(t==='cars')renderCars();if(t==='routes'){renderPlaces();renderRoutes();}
 });
 $('aboutLnk').onclick=()=>alert('料金モデル：各社公式（三井 2026/4、タイムズ 2025/12、オリックス 2026/3 改定後）の標準会員・標準シーズン目安。プレミアム/高級は推定を含むため要確認。各社にAPIは無く自動取得不可、⚙︎またはCSVで上書き保存できます。\n\n距離モデル：三井=6時間内0円/超過は全km、タイムズ=20km超分のみ、オリックス=全km。\n\n高速代：Googleは日本の通行料金を返さないため距離からの概算。正確な額は「NEXCOで調べる」リンクから。\n\nGoogle Maps料金：2025年3月以降SKUごとに月間無料枠。個人の手動利用は通常¥0。キーにはリファラー制限を。');
 
@@ -686,14 +813,15 @@ $('classSeg').querySelectorAll('button').forEach(x=>x.classList.toggle('on',x.da
 $('verified').value=verified;$('verFoot').textContent=verified;
 renderSettings();
 renderRoutes();
+renderPlaces();
 const savedKey=lsGet('dj_key');
 if(savedKey){$('apiKey').value=savedKey;activateMaps(savedKey);}
 calc();
 if('serviceWorker' in navigator && location.protocol==='https:'){
   let reloaded=false;
   navigator.serviceWorker.addEventListener('controllerchange',()=>{if(reloaded)return;reloaded=true;location.reload();});
-  window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').then(reg=>reg.update()).catch(()=>{}));
-}
+  window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').then(reg=>reg.update()).catch(()=>{});checkUpdate();});
+}else{checkUpdate();}
 </script>
 </body>
 </html>
